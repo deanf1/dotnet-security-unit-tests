@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema id="test"
+    targetNamespace="http://tempuri.org/test.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/test.xsd"
+    xmlns:mstns="http://tempuri.org/test.xsd"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+>
+  <xsd:element name="test" type="xsd:string" />
+  
+</xsd:schema>
