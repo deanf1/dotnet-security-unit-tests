@@ -1,0 +1,6 @@
+To deploy the web application:
+
+	- Run the Visual Studio Developer Command Prompt as administrator
+	- Navigate to the project folder (where this file is located)
+	- Run DeployWebApp.bat
+	- Press 'q' to close the server when finished
