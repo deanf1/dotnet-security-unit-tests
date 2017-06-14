@@ -27,13 +27,14 @@
             <li><a href="xmlview.aspx?title=Safe%20Linq&test=XDocument%3A%20Safe%20by%20Default%20Example&var=linqxdocumentsafe">XDocument: Safe by Default Example</a></li>
             <li><a href="xmlview.aspx?title=Safe%20Linq&test=Unsafe%20when%20Providing%20an%20Unsafe%20XML%20Parser%20Example&var=linqxdocumentunsafe">XDocument: Unsafe when Providing an Unsafe XML Parser Example</a></li>
         </ul>
-    </li><br />
+    <br /></li>
     
     <li><a href="https://msdn.microsoft.com/en-us/library/system.xml.xmldictionaryreader(v=vs.110).aspx">System.Xml.<b>XmlDictionaryReader</b> (link to MSDN docs)</a>
         <ul>
-            <li><a href="xmldictionaryreaderunsafedefault.jsp">? by Default Example (TODO)</a></li>
+            <li><a href="xmlview.aspx?title=Safe%20XmlDictionaryReader&test=Safe%20by%20Default%20Example&var=xmldictionaryreadersafe">Safe by Default Example</a></li>
+            <li><a href="xmlview.aspx?title=Unsafe%20XmlDictionaryReader&test=Unsafe%20when%20Providing%20an%20Unsafe%20XML%20Parser%20Example&var=xmldictionaryreaderunsafe">Unsafe when Providing an Unsafe XML Parser Example</a></li>
         </ul>
-    </li><br />
+    <br /></li>
 
     <li><a href="https://msdn.microsoft.com/en-us/library/system.xml.xmldocument(v=vs.110).aspx">System.Xml.<b>XmlDocument</b> (link to MSDN docs)</a>
         <ul>
@@ -44,14 +45,21 @@
             %>
             <li><a href="xmlview.aspx?title=Safe%20XmlDocument&test=Safe%20when%20Setting%20the%20XmlResolver%20to%20null%20Example&var=xmldocumentsafe">Safe when Setting the XmlResolver to null Example</a></li>
         </ul>
-    </li><br />
+    <br /></li>
 
     <li><a href="https://msdn.microsoft.com/en-us/library/system.xml.xmlreader(v=vs.110).aspx">System.Xml.<b>XmlReader</b> (link to MSDN docs)</a>
         <ul>
             <li><a href="xmlview.aspx?title=Safe%20XmlReader&test=Safe%20By%20Default%20Example&var=xmlreadersafe">Safe by Default Example</a></li>
             <li><a href="xmlview.aspx?title=Unsafe%20XmlReader&test=Unsafe%20when%20Resolving%20Entities%20Manually%20Example&var=xmlreaderunsafe">Unsafe when Resolving Entities Manually Example</a></li>
         </ul>
-    </li><br />
+    <br /></li>
+
+    <li><a href="https://msdn.microsoft.com/en-us/library/system.xml.xmlnodereader(v=vs.110).aspx">System.Xml.<b>XmlNodeReader</b> (link to MSDN docs)</a>
+        <ul>
+            <li><a href="xmlview.aspx?title=Safe%20XmlNodeReader&test=Safe%20By%20Default%20Example&var=xmlnodereadersafe">Safe by Default Example</a></li>
+            <li><a href="xmlview.aspx?title=Safe%20XmlNodeReader&test=Safe%20when%20Wrapping%20in%20an%20Unsafe%20XmlReader%20Example&var=xmlnodereadersafexmlreader">Safe when Wrapping in an Unsafe XmlReader Example</a></li>
+        </ul>
+    <br /></li>
 	
     <li><a href="https://msdn.microsoft.com/en-us/library/system.xml.xmltextreader(v=vs.110).aspx">System.Xml.<b>XmlTextReader</b> (link to MSDN docs)</a>
         <ul>
@@ -63,13 +71,13 @@
             <li><a href="xmlview.aspx?title=Safe%20XmlTextReader&test=Safe%20when%20Prohibiting%20DTDs%20Example&var=xmltextreadersafe">Safe when Prohibiting DTDs Example</a></li>
             <li><a href="xmlview.aspx?title=Unsafe%20XmlTextReader&test=Unsafe%20when%20Resolving%20Entities%20Manually%20Example&var=xmltextreaderunsafe">Unsafe when Resolving Entities Manually Example</a></li>
         </ul>
-    </li><br />
+    <br /></li>
 	
     <li><a href="https://msdn.microsoft.com/en-us/library/system.xml.xpath.xpathnavigator(v=vs.110).aspx">System.Xml.XPath.<b>XPathNavigator</b> (link to MSDN docs)</a>
         <ul>
             <li><a href="xmlreaderunsafedefault.jsp">? by Default Example (TODO)</a></li>
         </ul>
-    </li><br />
+    <br /></li>
 	
     <li><a href="https://msdn.microsoft.com/en-us/library/system.xml.xsl.xslcompiledtransform(v=vs.110).aspx">System.Xml.Xsl.<b>XslCompiledTransform</b> (link to MSDN docs)</a>
         <ul>

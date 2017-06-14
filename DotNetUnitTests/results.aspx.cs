@@ -97,8 +97,8 @@ namespace xxetestwebdotnet
                             //res.ResolveUri(new Uri(Environment.CurrentDirectory), "resources/xxetestuser.xml"); // works but not needed
                             settings.XmlResolver = res;
                         }
-
-                        XDocument xdocument = XDocument.Load(XmlReader.Create(appPath + "resources/xxetestuser.xml", settings));    // unsafe!
+                        XmlReader reader = XmlReader.Create(appPath + "resources/xxetestuser.xml", settings);
+                        XDocument xdocument = XDocument.Load(reader);    // unsafe!
 
                         try
                         {
@@ -118,6 +118,93 @@ namespace xxetestwebdotnet
                         catch (Exception ex)
                         {
                             PrintResults(expectedSafe, true, ex);   // safe: exception thrown when parsing XML
+                        }
+                        finally
+                        {
+                            reader.Close();
+                        }
+
+                        break;
+                    }
+                #endregion
+
+                #region XmlDictionaryReader: Safe by Default Example
+                case "xmldictionaryreadersafe":
+                    {
+                        bool expectedSafe = true;
+
+                        XmlDictionaryReader dict = XmlDictionaryReader.CreateTextReader(Encoding.ASCII.GetBytes(xmltext), XmlDictionaryReaderQuotas.Max);
+
+                        try
+                        {
+                            // parsing the XML  
+                            StringBuilder sb = new StringBuilder();
+                            while (dict.Read())
+                            {
+                                sb.Append(dict.Value);
+                            }
+
+                            // testing the result
+                            if (sb.ToString().Contains("SUCCESSFUL"))
+                                PrintResults(expectedSafe, false, sb.ToString());   // unsafe: successful XXE injection
+                            else
+                                PrintResults(expectedSafe, true, sb.ToString());    // safe: empty or unparsed XML
+                        }
+                        catch (Exception ex)
+                        {
+                            PrintResults(expectedSafe, true, ex);   // safe: exception thrown when parsing XML
+                        }
+                        finally
+                        {
+                            dict.Close();
+                        }
+
+                        break;
+                    }
+                #endregion
+                    
+                #region XmlDictionaryReader: Unsafe when Providing an Unsafe XML Parser Example
+                case "xmldictionaryreaderunsafe":
+                    {
+                        bool expectedSafe = false;
+
+                        XmlReaderSettings settings = new XmlReaderSettings();
+                        settings.DtdProcessing = DtdProcessing.Parse;   // unsafe!
+
+                        // forcing unsafe in .NET versions 4.5.2+
+                        if (HttpRuntime.TargetFramework.Minor >= 6 || HttpRuntime.TargetFramework.ToString().Equals("4.5.2"))
+                        {
+                            XmlUrlResolver res = new XmlUrlResolver();
+                            //res.ResolveUri(new Uri(Environment.CurrentDirectory), "resources/xxetestuser.xml"); // works but not needed
+                            settings.XmlResolver = res;
+                        }
+
+                        XmlReader reader = XmlReader.Create(appPath + "resources/xxetestuser.xml", settings);
+                        XmlDictionaryReader dict = XmlDictionaryReader.CreateDictionaryReader(reader);
+                        
+                        try
+                        {
+                            // parsing the XML  
+                            StringBuilder sb = new StringBuilder();
+                            while (dict.Read())
+                            {
+                                sb.Append(dict.Value);
+                            }
+
+                            // testing the result
+                            if (sb.ToString().Contains("SUCCESSFUL"))
+                                PrintResults(expectedSafe, false, sb.ToString());   // unsafe: successful XXE injection
+                            else
+                                PrintResults(expectedSafe, true, sb.ToString());    // safe: empty or unparsed XML
+                        }
+                        catch (Exception ex)
+                        {
+                            PrintResults(expectedSafe, true, ex);   // safe: exception thrown when parsing XML
+                        }
+                        finally
+                        {
+                            dict.Close();
+                            reader.Close();
                         }
 
                         break;
@@ -255,6 +342,94 @@ namespace xxetestwebdotnet
                         finally
                         {
                             reader.Close();
+                        }
+
+                        break;
+                    }
+                #endregion
+
+                #region XmlNodeReader: Safe by Default Example
+                case "xmlnodereadersafe":
+                    {
+                        bool expectedSafe = true;
+
+                        XmlDocument doc = new XmlDocument();
+                        doc.Load(appPath+ "resources/xxetestuser.xml"); // unsafe! (safe in .NET versions 4.5.2+)
+                        XmlNodeReader reader = new XmlNodeReader(doc);  // safe even though the XmlDocument might not be!
+
+                        try
+                        {
+                            // parsing the XML
+                            StringBuilder sb = new StringBuilder();
+                            while (reader.Read())
+                            {
+                                sb.Append(reader.Value);
+                            }
+
+                            // testing the result
+                            if (sb.ToString().Contains("SUCCESSFUL"))
+                                PrintResults(expectedSafe, false, sb.ToString());   // unsafe: successful XXE injection
+                            else
+                                PrintResults(expectedSafe, true, sb.ToString());    // safe: empty or unparsed XML
+                        }
+                        catch (Exception ex)
+                        {
+                            PrintResults(expectedSafe, true, ex);   // safe: exception thrown when parsing XML
+                        }
+                        finally
+                        {
+                            reader.Close();
+                        }
+
+                        break;
+                    }
+                #endregion
+
+                #region XmlNodeReader: Safe when Wrapping in an Unsafe XmlReader Example
+                case "xmlnodereadersafexmlreader":
+                    {
+                        bool expectedSafe = true;
+
+                        XmlDocument doc = new XmlDocument();
+                        doc.Load(appPath + "resources/xxetestuser.xml"); // unsafe! (safe in .NET versions 4.5.2+)
+                        XmlNodeReader reader = new XmlNodeReader(doc);  // safe even though the XmlDocument might not be!
+
+                        XmlReaderSettings settings = new XmlReaderSettings();
+                        settings.DtdProcessing = DtdProcessing.Parse;   // unsafe!
+
+                        // forcing unsafe in .NET versions 4.5.2+
+                        if (HttpRuntime.TargetFramework.Minor >= 6 || HttpRuntime.TargetFramework.ToString().Equals("4.5.2"))
+                        {
+                            XmlUrlResolver res = new XmlUrlResolver();
+                            //res.ResolveUri(new Uri(Environment.CurrentDirectory), "resources/xxetestuser.xml"); // works but not needed
+                            settings.XmlResolver = res;
+                        }
+
+                        XmlReader xmlReader = XmlReader.Create(reader, settings);   // safe even though XmlReaderSettings unsafe!
+
+                        try
+                        {
+                            // parsing the XML
+                            StringBuilder sb = new StringBuilder();
+                            while (xmlReader.Read())
+                            {
+                                sb.Append(xmlReader.Value);
+                            }
+
+                            // testing the result
+                            if (sb.ToString().Contains("SUCCESSFUL"))
+                                PrintResults(expectedSafe, false, sb.ToString());   // unsafe: successful XXE injection
+                            else
+                                PrintResults(expectedSafe, true, sb.ToString());    // safe: empty or unparsed XML
+                        }
+                        catch (Exception ex)
+                        {
+                            PrintResults(expectedSafe, true, ex);   // safe: exception thrown when parsing XML
+                        }
+                        finally
+                        {
+                            reader.Close();
+                            xmlReader.Close();
                         }
 
                         break;
