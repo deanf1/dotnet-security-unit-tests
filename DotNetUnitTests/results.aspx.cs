@@ -4,6 +4,7 @@ using System.Text;
 using System.Web;
 using System.Xml;
 using System.Xml.Linq;
+using System.Xml.XPath;
 using System.Xml.Xsl;
 
 namespace xxetestwebdotnet
@@ -436,7 +437,7 @@ namespace xxetestwebdotnet
                     }
                 #endregion
 
-                #region XmlTextReader: Unsafe by Default Example
+                #region XmlTextReader: Safe by Default in .NET Version 4.5.2 and above / Unsafe by Default in .NET Version 4.5.1 and lower Example
                 case "xmltextreadersafe452":
                     {
                         bool expectedSafe = false;
@@ -523,9 +524,12 @@ namespace xxetestwebdotnet
                         XmlTextReader reader = new XmlTextReader(appPath + "resources/xxetestuser.xml");    // unsafe! (safe in .NET versions 4.5.2+)
 
                         // forcing unsafe in .NET versions 4.5.2+
-                        XmlUrlResolver res = new XmlUrlResolver();
-                        //res.ResolveUri(new Uri(Environment.CurrentDirectory), "resources/xxetestuser.xml"); // works but not needed
-                        reader.XmlResolver = res;
+                        if (HttpRuntime.TargetFramework.Minor >= 6 || HttpRuntime.TargetFramework.ToString().Equals("4.5.2"))
+                        {
+                            XmlUrlResolver res = new XmlUrlResolver();
+                            //res.ResolveUri(new Uri(Environment.CurrentDirectory), "resources/xxetestuser.xml"); // works but not needed
+                            reader.XmlResolver = res;
+                        }
 
                         try
                         {
@@ -544,6 +548,73 @@ namespace xxetestwebdotnet
                                 PrintResults(expectedSafe, false, sb.ToString());   // unsafe: successful XXE injection
                             else
                                 PrintResults(expectedSafe, true, sb.ToString());    // safe: empty or unparsed XML
+
+                        }
+                        catch (Exception ex)
+                        {
+                            PrintResults(expectedSafe, true, ex);   // safe: exception thrown when parsing XML
+                        }
+                        finally
+                        {
+                            reader.Close();
+                        }
+
+                        break;
+                    }
+                #endregion
+
+                #region XPathNavigator: Safe by Default in .NET Version 4.5.2 and above / Unsafe by Default in .NET Version 4.5.1 and lower Example
+                case "xpathnavigatorsafe452":
+                    {
+                        bool expectedSafe = false;
+                        if (HttpRuntime.TargetFramework.Minor >= 6 || HttpRuntime.TargetFramework.ToString().Equals("4.5.2"))
+                            expectedSafe = true;
+
+                        XPathDocument doc = new XPathDocument(appPath + "resources/xxetestuser.xml");
+                        XPathNavigator nav = doc.CreateNavigator(); // unsafe!
+
+                        try
+                        {
+                            // parsing the XML
+                            string xml = nav.InnerXml.ToString();
+
+                            // testing the result
+                            if (xml.Contains("SUCCESSFUL"))
+                                PrintResults(expectedSafe, false, xml);   // unsafe: successful XXE injection
+                            else
+                                PrintResults(expectedSafe, true, xml);    // safe: empty or unparsed XML
+
+                        }
+                        catch (Exception ex)
+                        {
+                            PrintResults(expectedSafe, true, ex);   // safe: exception thrown when parsing XML
+                        }
+
+                        break;
+                    }
+                #endregion
+
+                #region XPathNavigator: Safe when Providing a Safe XML Parser Example
+                case "xpathnavigatorsafe":
+                    {
+                        bool expectedSafe = false;
+                        if (HttpRuntime.TargetFramework.Minor >= 6 || HttpRuntime.TargetFramework.ToString().Equals("4.5.2"))
+                            expectedSafe = true;
+
+                        XmlReader reader = XmlReader.Create(appPath + "resources/xxetestuser.xml");   
+
+                        try
+                        {
+                            // parsing the XML
+                            XPathDocument doc = new XPathDocument(reader);
+                            XPathNavigator nav = doc.CreateNavigator(); // unsafe!
+                            string xml = nav.InnerXml.ToString();
+
+                            // testing the result
+                            if (xml.Contains("SUCCESSFUL"))
+                                PrintResults(expectedSafe, false, xml);   // unsafe: successful XXE injection
+                            else
+                                PrintResults(expectedSafe, true, xml);    // safe: empty or unparsed XML
 
                         }
                         catch (Exception ex)
@@ -594,9 +665,12 @@ namespace xxetestwebdotnet
                         XmlTextReader reader = new XmlTextReader(appPath + "resources/xxetestuser.xml");    // unsafe! (safe in .NET version 4.5.2+)
 
                         // forcing unsafe in .NET versions 4.5.2+
-                        XmlUrlResolver res = new XmlUrlResolver();
-                        //res.ResolveUri(new Uri(Environment.CurrentDirectory), "resources/xxetestuser.xml"); // works but not needed
-                        reader.XmlResolver = res;
+                        if (HttpRuntime.TargetFramework.Minor >= 6 || HttpRuntime.TargetFramework.ToString().Equals("4.5.2"))
+                        {
+                            XmlUrlResolver res = new XmlUrlResolver();
+                            //res.ResolveUri(new Uri(Environment.CurrentDirectory), "resources/xxetestuser.xml"); // works but not needed
+                            reader.XmlResolver = res;
+                        }
 
                         try
                         {

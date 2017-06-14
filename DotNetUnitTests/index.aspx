@@ -13,9 +13,9 @@
 <%  Response.Write("<h3>");
     Response.Write("Current .NET Framework Version: " + HttpRuntime.TargetFramework.ToString());
     if (HttpRuntime.TargetFramework.Minor >= 6 || HttpRuntime.TargetFramework.ToString().Equals("4.5.2"))
-        Response.Write("<br />" + "Unsafe Tests: tbd" + "<br />" + "Safe Tests: tbd"); // Counts for if .NET 4.6 or greater
+        Response.Write("<br />" + "Unsafe Tests: 5" + "<br />" + "Safe Tests: 13"); // Counts for if .NET 4.6 or greater
     else
-        Response.Write("<br />" + "Unsafe Tests: tbd" + "<br />" + "Safe Tests: tbd"); // Counts for all other .NET versions
+        Response.Write("<br />" + "Unsafe Tests: 8" + "<br />" + "Safe Tests: 10"); // Counts for all other .NET versions
     Response.Write("</h3>");
 %>
 
@@ -75,7 +75,12 @@
 	
     <li><a href="https://msdn.microsoft.com/en-us/library/system.xml.xpath.xpathnavigator(v=vs.110).aspx">System.Xml.XPath.<b>XPathNavigator</b> (link to MSDN docs)</a>
         <ul>
-            <li><a href="xmlreaderunsafedefault.jsp">? by Default Example (TODO)</a></li>
+            <%  if (HttpRuntime.TargetFramework.Minor >= 6 || HttpRuntime.TargetFramework.ToString().Equals("4.5.2"))
+                    Response.Write("<li><a href=\"xmlview.aspx?title=Safe%20XPathNavigator&test=Safe%20by%20Default%20in%20Current%20.NET%20Version%20%284.5.2%20and%20above%29%20Example&var=xpathnavigatorsafe452\">Safe by Default in Current .NET Version (4.5.2 and above) Example</a></li>");
+                else
+                    Response.Write("<li><a href=\"xmlview.aspx?title=Unsafe%20XPathNavigator&test=Unsafe%20by%20Default%20in%20Current%20.NET%20Version%20%284.5.1%20and%20lower%29%20Example&var=xpathnavigatorsafe452\">Unsafe by Default in Current .NET Version (4.5.1 and lower) Example</a></li>");
+            %>
+            <li><a href="xmlview.aspx?title=Safe%20XPathNavigator&test=Safe%20when%20Providing%20a%20Safe%20XML%20Parser%20Example&var=xpathnavigatorsafe">Safe when Providing a Safe XML Parser Example</a></li>
         </ul>
     <br /></li>
 	
@@ -88,11 +93,12 @@
 </ul>
 
 <br /><br />
-References:
+References (note: test results in references may not be accurate to the test results here):
 <ol>
     <li><a href="https://www.owasp.org/index.php/XML_External_Entity_(XXE)_Prevention_Cheat_Sheet#.NET">OWASP XML External Entity (XXE) Prevention Cheat Sheet</a><br /></li>
     <li><a href="https://www.jardinesoftware.net/2016/05/26/xxe-and-net/">"XXE and .NET" by James Jardine</a></li>
-    <li><a href="https://blogs.msdn.microsoft.com/xmlteam/2005/11/16/introducing-xslcompiledtransform/">Microsoft XML Team: Introducing XslCompiledTransform</a></li>
+    <li><a href="https://www.jardinesoftware.net/2016/09/12/xxe-in-net-and-xpathdocument/">"XXE in .NET and XPathDocument" by James Jardine</a></li>
+    <li><a href="https://blogs.msdn.microsoft.com/xmlteam/2005/11/16/introducing-xslcompiledtransform/">Microsoft XML Team: Introducing XslCompiledTransform</a></li>   
 </ol>
 
 </body>
