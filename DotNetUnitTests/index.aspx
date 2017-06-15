@@ -44,6 +44,7 @@
                     Response.Write("<li><a href=\"xmlview.aspx?title=Unsafe%20XmlDocument&test=Unsafe%20by%20Default%20in%20Current%20.NET%20Version%20%284.5.1%20and%20lower%29%20Example&var=xmldocumentsafe452\">Unsafe by Default in Current .NET Version (4.5.1 and lower) Example</a></li>");
             %>
             <li><a href="xmlview.aspx?title=Safe%20XmlDocument&test=Safe%20when%20Setting%20the%20XmlResolver%20to%20null%20Example&var=xmldocumentsafe">Safe when Setting the XmlResolver to null Example</a></li>
+            <li><a href="xmlview.aspx?title=Unsafe%20XmlDocument&test=Unsafe%20when%20Resolving%20Entities%20Manually%20Example&var=xmldocumentunsafe">Unsafe when Resolving Entities Manually Example</a></li>
         </ul>
     <br /></li>
 
