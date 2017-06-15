@@ -13,9 +13,9 @@
 <%  Response.Write("<h3>");
     Response.Write("Current .NET Framework Version: " + HttpRuntime.TargetFramework.ToString());
     if (HttpRuntime.TargetFramework.Minor >= 6 || HttpRuntime.TargetFramework.ToString().Equals("4.5.2"))
-        Response.Write("<br />" + "Unsafe Tests: 5" + "<br />" + "Safe Tests: 13"); // Counts for if .NET 4.6 or greater
+        Response.Write("<br />" + "Unsafe Tests: 6" + "<br />" + "Safe Tests: 13"); // Counts for if .NET 4.6 or greater
     else
-        Response.Write("<br />" + "Unsafe Tests: 8" + "<br />" + "Safe Tests: 10"); // Counts for all other .NET versions
+        Response.Write("<br />" + "Unsafe Tests: 9" + "<br />" + "Safe Tests: 10"); // Counts for all other .NET versions
     Response.Write("</h3>");
 %>
 
@@ -99,7 +99,9 @@ References (note: test results in references may not be accurate to the test res
     <li><a href="https://www.owasp.org/index.php/XML_External_Entity_(XXE)_Prevention_Cheat_Sheet#.NET">OWASP XML External Entity (XXE) Prevention Cheat Sheet</a><br /></li>
     <li><a href="https://www.jardinesoftware.net/2016/05/26/xxe-and-net/">"XXE and .NET" by James Jardine</a></li>
     <li><a href="https://www.jardinesoftware.net/2016/09/12/xxe-in-net-and-xpathdocument/">"XXE in .NET and XPathDocument" by James Jardine</a></li>
-    <li><a href="https://blogs.msdn.microsoft.com/xmlteam/2005/11/16/introducing-xslcompiledtransform/">Microsoft XML Team: Introducing XslCompiledTransform</a></li>   
+    <li><a href="https://blogs.msdn.microsoft.com/xmlteam/2005/11/16/introducing-xslcompiledtransform/">Microsoft XML Team: Introducing XslCompiledTransform</a></li>
+    <li><a href="https://github.com/dotnet/docs/blob/master/docs/visual-basic/programming-guide/concepts/linq/linq-to-xml-security.md">.NET Team: LINQ to XML Security</a></li> 
+    <li><a href="http://www.dotnetframework.org/default.aspx/4@0/4@0/DEVDIV_TFS/Dev10/Releases/RTMRel/ndp/fx/src/Xml/System/Xml/Xslt/XslCompiledTransform@cs/1305376/XslCompiledTransform@cs">XslCompiledTransform.cs Source Code</a></li>  
 </ol>
 
 </body>
