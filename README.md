@@ -8,7 +8,7 @@ The purpose of this web app is to test the following vulnerabilities in .NET:
 - XML External Enitity (XXE) Injection
 - NHibernate Query Language (HQL) Injection (coming soon)
 
-The code can be analyzed by static code tools or deployed as a web application and analyzed via dynamic tools. The underlying code can also be used as examples for how to make .NET code safe/unsafe.
+The code can be analyzed by static code tools or deployed as a web application and analyzed via dynamic tools. The underlying C# code ([found here](./DotNetUnitTests/results.aspx.cs)) can also be used as examples for how to make .NET code safe/unsafe.
 
 ## Installation
 Please see the [INSTRUCTIONS.txt](./INSTRUCTIONS.txt) file for information on deploying the web app.
