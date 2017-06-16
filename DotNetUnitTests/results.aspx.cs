@@ -718,7 +718,7 @@ namespace xxetestwebdotnet
                         {
                             // parsing the XML
                             XPathDocument doc = new XPathDocument(reader);
-                            XPathNavigator nav = doc.CreateNavigator(); // unsafe!
+                            XPathNavigator nav = doc.CreateNavigator(); 
                             string xml = nav.InnerXml.ToString();
 
                             // testing the result
