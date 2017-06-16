@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace xxetestwebdotnet {
+namespace DotNetUnitTests {
     
     
     public partial class results {

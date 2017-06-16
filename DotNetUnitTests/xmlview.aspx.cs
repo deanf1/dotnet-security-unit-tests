@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace xxetestwebdotnet
+namespace DotNetUnitTests
 {
     public partial class xmlview : System.Web.UI.Page
     {

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="xxetestwebdotnet.index" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="DotNetUnitTests.index" %>
 <%@ Import Namespace="Microsoft.Win32" %>
 
 <!DOCTYPE html>

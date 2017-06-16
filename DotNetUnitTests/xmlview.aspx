@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="xmlview.aspx.cs" Inherits="xxetestwebdotnet.xmlview" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="xmlview.aspx.cs" Inherits="DotNetUnitTests.xmlview" %>
 
 <!DOCTYPE html>
 

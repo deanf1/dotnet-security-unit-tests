@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="results.aspx.cs" Inherits="xxetestwebdotnet.results" validateRequest="false"%>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="results.aspx.cs" Inherits="DotNetUnitTests.results" validateRequest="false"%>
 
 <!DOCTYPE html>
 

@@ -7,7 +7,7 @@ using System.Xml.Linq;
 using System.Xml.XPath;
 using System.Xml.Xsl;
 
-namespace xxetestwebdotnet
+namespace DotNetUnitTests
 {
     public partial class results : System.Web.UI.Page
     {
