@@ -672,7 +672,7 @@ namespace xxetestwebdotnet
                 /**
                  * XPathNavigator is safe in .NET versions 4.5.2 and up, and unsafe in versions 4.5.1 and under, because it implements IXPathNavigable objects (such as XmlDocument).
                  * This causes XPathNavigator to be just as safe as they are: parsing entities in any version before 4.5.2 only.
-                 * These objects are private to the class however, so XPathNavigator can not be forced to be unsafe.
+                 * These objects are private to the class however, so XPathNavigator can not be forced to be unsafe in .NET versions 4.5.2 and later.
                  */
                 case "xpathnavigatorsafe452":
                     {
