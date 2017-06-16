@@ -74,15 +74,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\PublishProfiles\XXETest.pubxml" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.RunWith45.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="index.aspx" />
