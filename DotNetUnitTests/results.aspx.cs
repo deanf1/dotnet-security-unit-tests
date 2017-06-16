@@ -22,7 +22,7 @@ namespace xxetestwebdotnet
             switch (Request.QueryString["var"])
             {
                    
-                #region Linq: XElement: Safe by Default Example
+                #region LINQ: XElement: Safe by Default Example
                 /**
                  * XElement is always safe due to the fact that it ignores anything in the XML that isn't an element.
                  */
@@ -56,7 +56,7 @@ namespace xxetestwebdotnet
                     }
                 #endregion
 
-                #region Linq: XDocument: Safe by Default Example
+                #region LINQ: XDocument: Safe by Default Example
                 /**
                  * XDocument has DTDs disabled by default, making it not parse entities by default.
                  * (Source: https://github.com/dotnet/docs/blob/master/docs/visual-basic/programming-guide/concepts/linq/linq-to-xml-security.md)
@@ -91,7 +91,7 @@ namespace xxetestwebdotnet
                     }
                 #endregion
 
-                #region Linq: XDocument: Unsafe when Providing an Unsafe XML Parser Example
+                #region LINQ: XDocument: Unsafe when Providing an Unsafe XML Parser Example
                 /**
                  * If you create your XDocument with an unsafe XML parser, it makes the XDocument unsafe as well.
                  */

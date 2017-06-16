@@ -23,9 +23,9 @@
 <ul>
     <li><a href="https://msdn.microsoft.com/en-us/library/system.xml.linq(v=vs.110).aspx">System.Xml.<b>Linq</b> (link to MSDN docs)</a>
         <ul>
-            <li><a href="xmlview.aspx?title=Safe%20Linq&test=XElement%3A%20Safe%20by%20Default%20Example&var=linqxelementsafe">XElement: Safe by Default Example</a></li>
-            <li><a href="xmlview.aspx?title=Safe%20Linq&test=XDocument%3A%20Safe%20by%20Default%20Example&var=linqxdocumentsafe">XDocument: Safe by Default Example</a></li>
-            <li><a href="xmlview.aspx?title=Safe%20Linq&test=Unsafe%20when%20Providing%20an%20Unsafe%20XML%20Parser%20Example&var=linqxdocumentunsafe">XDocument: Unsafe when Providing an Unsafe XML Parser Example</a></li>
+            <li><a href="xmlview.aspx?title=Safe%20LINQ&test=XElement%3A%20Safe%20by%20Default%20Example&var=linqxelementsafe">XElement: Safe by Default Example</a></li>
+            <li><a href="xmlview.aspx?title=Safe%20LINQ&test=XDocument%3A%20Safe%20by%20Default%20Example&var=linqxdocumentsafe">XDocument: Safe by Default Example</a></li>
+            <li><a href="xmlview.aspx?title=Safe%20LINQ&test=Unsafe%20when%20Providing%20an%20Unsafe%20XML%20Parser%20Example&var=linqxdocumentunsafe">XDocument: Unsafe when Providing an Unsafe XML Parser Example</a></li>
         </ul>
     <br /></li>
     
