@@ -48,17 +48,17 @@
         </ul>
     <br /></li>
 
-    <li><a href="https://msdn.microsoft.com/en-us/library/system.xml.xmlreader(v=vs.110).aspx">System.Xml.<b>XmlReader</b> (link to MSDN docs)</a>
-        <ul>
-            <li><a href="xmlview.aspx?title=Safe%20XmlReader&test=Safe%20By%20Default%20Example&var=xmlreadersafe">Safe by Default Example</a></li>
-            <li><a href="xmlview.aspx?title=Unsafe%20XmlReader&test=Unsafe%20when%20Resolving%20Entities%20Manually%20Example&var=xmlreaderunsafe">Unsafe when Resolving Entities Manually Example</a></li>
-        </ul>
-    <br /></li>
-
     <li><a href="https://msdn.microsoft.com/en-us/library/system.xml.xmlnodereader(v=vs.110).aspx">System.Xml.<b>XmlNodeReader</b> (link to MSDN docs)</a>
         <ul>
             <li><a href="xmlview.aspx?title=Safe%20XmlNodeReader&test=Safe%20By%20Default%20Example&var=xmlnodereadersafe">Safe by Default Example</a></li>
             <li><a href="xmlview.aspx?title=Safe%20XmlNodeReader&test=Safe%20when%20Wrapping%20in%20an%20Unsafe%20XmlReader%20Example&var=xmlnodereadersafexmlreader">Safe when Wrapping in an Unsafe XmlReader Example</a></li>
+        </ul>
+    <br /></li>
+
+    <li><a href="https://msdn.microsoft.com/en-us/library/system.xml.xmlreader(v=vs.110).aspx">System.Xml.<b>XmlReader</b> (link to MSDN docs)</a>
+        <ul>
+            <li><a href="xmlview.aspx?title=Safe%20XmlReader&test=Safe%20By%20Default%20Example&var=xmlreadersafe">Safe by Default Example</a></li>
+            <li><a href="xmlview.aspx?title=Unsafe%20XmlReader&test=Unsafe%20when%20Resolving%20Entities%20Manually%20Example&var=xmlreaderunsafe">Unsafe when Resolving Entities Manually Example</a></li>
         </ul>
     <br /></li>
 	

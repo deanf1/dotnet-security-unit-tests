@@ -331,95 +331,6 @@ namespace xxetestwebdotnet
                     }
                 #endregion
 
-                #region XmlReader: Safe by Default Example
-                /**
-                 * XmlReader has DtdProcessing set to Prohibit by default, throwing an exception when it reads a DTD.
-                 */
-                case "xmlreadersafe":
-                    {
-                        bool expectedSafe = true;
-
-                        XmlReader reader = XmlReader.Create(appPath + "resources/xxetestuser.xml");
-
-                        try
-                        {
-                            // parsing the XML                          
-                            StringBuilder sb = new StringBuilder();
-                            while (reader.Read())
-                            {
-                                sb.Append(reader.Value);
-                            }
-
-                            // testing the result
-                            if (sb.ToString().Contains("SUCCESSFUL"))
-                                PrintResults(expectedSafe, false, sb.ToString());   // unsafe: successful XXE injection
-                            else
-                                PrintResults(expectedSafe, true, sb.ToString());    // safe: empty or unparsed XML
-                        }
-                        catch (Exception ex)
-                        {
-                            PrintResults(expectedSafe, true, ex);   // safe: exception thrown when parsing XML
-                        }
-                        finally
-                        {
-                            reader.Close();
-                        }
-
-                        break;
-                    }
-                #endregion
-
-                #region XmlReader: Unsafe when Turning on DTDs Manually Example
-                /**
-                 * By giving the XmlReader a XmlReaderSettings object that has DtdProcessing set to Parse, the XmlReader will parse entities.
-                 * In .NET versions 4.5.2 and up, however, it is still safe because the XmlReaderSettings has a null XmlResolver object.
-                 * By creating your own nonnull XmlResolver object (in this case, an XmlUrlResolver) and giving it to the XmlReaderSettings that the XmlReader receives,
-                 * the XmlReader will parse the entities.
-                 */
-                case "xmlreaderunsafe":
-                    {
-                        bool expectedSafe = false;
-
-                        XmlReaderSettings settings = new XmlReaderSettings();
-                        settings.DtdProcessing = DtdProcessing.Parse;   // unsafe!
-
-                        // forcing unsafe in .NET versions 4.5.2+
-                        if (HttpRuntime.TargetFramework.Minor >= 6 || HttpRuntime.TargetFramework.ToString().Equals("4.5.2"))
-                        {
-                            XmlUrlResolver res = new XmlUrlResolver();
-                            //res.ResolveUri(new Uri(Environment.CurrentDirectory), "resources/xxetestuser.xml"); // works but not needed
-                            settings.XmlResolver = res;
-                        }
-                        XmlReader reader = XmlReader.Create(appPath + "resources/xxetestuser.xml", settings);
-
-                        try
-                        {
-                            // parsing the XML
-                            StringBuilder sb = new StringBuilder();
-                            while (reader.Read())
-                            {
-                                sb.Append(reader.Value);
-                            }
-
-                            // testing the result
-                            if (sb.ToString().Contains("SUCCESSFUL"))
-                                PrintResults(expectedSafe, false, sb.ToString());   // unsafe: successful XXE injection
-                            else
-                                PrintResults(expectedSafe, true, sb.ToString());    // safe: empty or unparsed XML
-                        }
-                        catch (Exception ex)
-                        {
-                            PrintResults(expectedSafe, true, ex);   // safe: exception thrown when parsing XML
-                        }
-                        finally
-                        {
-                            reader.Close();
-                        }
-
-                        break;
-                    }
-                #endregion
-
                 #region XmlNodeReader: Safe by Default Example
                 /**
                  * XmlNodeReader will ignore DTDs by default, even when created with an unsafe XmlDocument.
@@ -437,7 +348,7 @@ namespace xxetestwebdotnet
                             //res.ResolveUri(new Uri(Environment.CurrentDirectory), "resources/xxetestuser.xml"); // works but not needed
                             doc.XmlResolver = res;
                         }
-                        doc.Load(appPath+ "resources/xxetestuser.xml"); // unsafe! (safe in .NET versions 4.5.2+)
+                        doc.Load(appPath + "resources/xxetestuser.xml"); // unsafe! (safe in .NET versions 4.5.2+)
 
                         XmlNodeReader reader = new XmlNodeReader(doc);  // safe even though the XmlDocument is not!
 
@@ -526,6 +437,95 @@ namespace xxetestwebdotnet
                         {
                             reader.Close();
                             xmlReader.Close();
+                        }
+
+                        break;
+                    }
+                #endregion
+
+                #region XmlReader: Safe by Default Example
+                /**
+                 * XmlReader has DtdProcessing set to Prohibit by default, throwing an exception when it reads a DTD.
+                 */
+                case "xmlreadersafe":
+                    {
+                        bool expectedSafe = true;
+
+                        XmlReader reader = XmlReader.Create(appPath + "resources/xxetestuser.xml");
+
+                        try
+                        {
+                            // parsing the XML                          
+                            StringBuilder sb = new StringBuilder();
+                            while (reader.Read())
+                            {
+                                sb.Append(reader.Value);
+                            }
+
+                            // testing the result
+                            if (sb.ToString().Contains("SUCCESSFUL"))
+                                PrintResults(expectedSafe, false, sb.ToString());   // unsafe: successful XXE injection
+                            else
+                                PrintResults(expectedSafe, true, sb.ToString());    // safe: empty or unparsed XML
+                        }
+                        catch (Exception ex)
+                        {
+                            PrintResults(expectedSafe, true, ex);   // safe: exception thrown when parsing XML
+                        }
+                        finally
+                        {
+                            reader.Close();
+                        }
+
+                        break;
+                    }
+                #endregion
+
+                #region XmlReader: Unsafe when Turning on DTDs Manually Example
+                /**
+                 * By giving the XmlReader a XmlReaderSettings object that has DtdProcessing set to Parse, the XmlReader will parse entities.
+                 * In .NET versions 4.5.2 and up, however, it is still safe because the XmlReaderSettings has a null XmlResolver object.
+                 * By creating your own nonnull XmlResolver object (in this case, an XmlUrlResolver) and giving it to the XmlReaderSettings that the XmlReader receives,
+                 * the XmlReader will parse the entities.
+                 */
+                case "xmlreaderunsafe":
+                    {
+                        bool expectedSafe = false;
+
+                        XmlReaderSettings settings = new XmlReaderSettings();
+                        settings.DtdProcessing = DtdProcessing.Parse;   // unsafe!
+
+                        // forcing unsafe in .NET versions 4.5.2+
+                        if (HttpRuntime.TargetFramework.Minor >= 6 || HttpRuntime.TargetFramework.ToString().Equals("4.5.2"))
+                        {
+                            XmlUrlResolver res = new XmlUrlResolver();
+                            //res.ResolveUri(new Uri(Environment.CurrentDirectory), "resources/xxetestuser.xml"); // works but not needed
+                            settings.XmlResolver = res;
+                        }
+                        XmlReader reader = XmlReader.Create(appPath + "resources/xxetestuser.xml", settings);
+
+                        try
+                        {
+                            // parsing the XML
+                            StringBuilder sb = new StringBuilder();
+                            while (reader.Read())
+                            {
+                                sb.Append(reader.Value);
+                            }
+
+                            // testing the result
+                            if (sb.ToString().Contains("SUCCESSFUL"))
+                                PrintResults(expectedSafe, false, sb.ToString());   // unsafe: successful XXE injection
+                            else
+                                PrintResults(expectedSafe, true, sb.ToString());    // safe: empty or unparsed XML
+                        }
+                        catch (Exception ex)
+                        {
+                            PrintResults(expectedSafe, true, ex);   // safe: exception thrown when parsing XML
+                        }
+                        finally
+                        {
+                            reader.Close();
                         }
 
                         break;
