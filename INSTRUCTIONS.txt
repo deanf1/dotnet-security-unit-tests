@@ -2,6 +2,7 @@ To deploy the web application:
 
 	- Run the Visual Studio Developer Command Prompt as administrator
 	- Navigate to the project folder (where this file is located)
-	- Run either DeployWebAppDotNet451.bat to run in .NET 4.5.1 or DeployWebAppDotNet452.bat to run in .NET 4.5.2
+	- Run either DeployWebAppDotNet451.bat to run in .NET 4.5.1 , DeployWebAppDotNet452.bat to run in .NET 4.5.2, or DeployWebAppDotNet46.bat to run in .NET 4.6
+	  (Note: The major fixes happen in 4.5.2, and there is no discernable difference between running in 4.5.2 and 4.6)
 	- Press 'q' to close the server when finished
 	
