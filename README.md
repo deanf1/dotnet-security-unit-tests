@@ -9,7 +9,7 @@ The purpose of this web app is to test the following vulnerabilities in .NET:
    - A summary of these tests can be found in the [OWASP XXE Prevention Cheat Sheet](https://www.owasp.org/index.php/XML_External_Entity_(XXE)_Prevention_Cheat_Sheet#.NET)
 - NHibernate Query Language (HQL) Injection
 
-The code can be analyzed by static code tools or deployed as a web application and analyzed via dynamic tools. The underlying C# code ([found here](./DotNetUnitTests/results.aspx.cs)) can also be used as examples for how to make .NET code safe/unsafe. You can also find detailed comments in the code with each test explaining why it is safe/unsafe.
+The code can be analyzed by static code tools or deployed as a web application and analyzed via dynamic tools. The underlying C# code ([found here](./DotNetUnitTests/results.aspx.cs) for XXE, and [here](./DotNetUnitTests/hqlresults.aspx.cs) for HQL) can also be used as examples for how to make .NET code safe/unsafe. You can also find detailed comments in the code with each test explaining why it is safe/unsafe.
 
 ## Installation
 Please see the [INSTRUCTIONS.txt](./INSTRUCTIONS.txt) file for information on deploying the web app.
