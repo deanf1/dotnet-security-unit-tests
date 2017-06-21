@@ -61,7 +61,7 @@ namespace DotNetUnitTests
                         ISessionFactory sessionFactory = new Configuration().Configure().BuildSessionFactory();
                         ISession session = sessionFactory.OpenSession();
 
-                        // Creating and receiving the results the custom HQL query
+                        // Creating and receiving the results the custom SQL query
                         ISQLQuery query = session.CreateSQLQuery("SELECT * FROM Student WHERE FirstName = '" + hqltext + "';");    // unsafe!
                         query.AddEntity(typeof(Student));
 
@@ -116,7 +116,7 @@ namespace DotNetUnitTests
                         ISessionFactory sessionFactory = new Configuration().Configure().BuildSessionFactory();
                         ISession session = sessionFactory.OpenSession();
 
-                        // Creating and receiving the results the custom HQL query
+                        // Creating and receiving the results the custom SQL query
                         ISQLQuery query = session.CreateSQLQuery("SELECT * FROM Student WHERE FirstName = :name");
                         query.AddEntity(typeof(Student));
                         query.SetParameter("name", hqltext);    // safe!
