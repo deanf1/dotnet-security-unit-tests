@@ -15,18 +15,23 @@ namespace DotNetUnitTests
             switch (Request.QueryString["var"])
             {
                 #region NHibernate: Safe when Using Built-in Functions Example
+                /**
+                 * By using NHibernate's built-in functions that aim to make executing querys more object-oriented, the input query is inherently parameterized.
+                 */
                 /*case "safedefault":
                     {
                         bool expectedSafe = true;
+
+                        
 
                         break;
                     }*/
                 #endregion
 
+                #region NHibernate: Unsafe when Using String Concatenation on Custom HQL Queries (CreateQuery) Example
                 /**
                  * By doing string concatenation in the CreateQuery method, the HQL query is just as unsafe as any unsafe SQL query.
                  */
-                #region NHibernate: Unsafe when Using String Concatenation on Custom HQL Queries Example
                 case "unsafe":
                     {
                         bool expectedSafe = false;
@@ -35,7 +40,7 @@ namespace DotNetUnitTests
                         ISessionFactory sessionFactory = new Configuration().Configure().BuildSessionFactory();
                         ISession session = sessionFactory.OpenSession();
 
-                        // Creating and receiving the results the custom HQL query
+                        // Creating and receiving the results of the custom HQL query
                         IQuery query = session.CreateQuery("FROM DotNetUnitTests.Student WHERE FirstName = '" + hqltext + "';");    // unsafe!
                         IList<Student> students = query.List<Student>();
 
@@ -49,10 +54,10 @@ namespace DotNetUnitTests
                     }
                 #endregion
 
+                #region NHibernate: Unsafe when Using String Concatenation on Custom SQL Queries (CreateSQLQuery) Example
                 /**
                  * By doing string concatenation in the CreateSQLQuery method, the SQL query is unsafe.
                  */
-                #region NHibernate: Unsafe when Using String Concatenation on Custom SQL Queries Example
                 case "unsafesql":
                     {
                         bool expectedSafe = false;
@@ -61,7 +66,7 @@ namespace DotNetUnitTests
                         ISessionFactory sessionFactory = new Configuration().Configure().BuildSessionFactory();
                         ISession session = sessionFactory.OpenSession();
 
-                        // Creating and receiving the results the custom SQL query
+                        // Creating and receiving the results of the custom SQL query
                         ISQLQuery query = session.CreateSQLQuery("SELECT * FROM Student WHERE FirstName = '" + hqltext + "';");    // unsafe!
                         query.AddEntity(typeof(Student));
 
@@ -77,10 +82,10 @@ namespace DotNetUnitTests
                     }
                 #endregion
 
+                #region NHibernate: Safe when Parameterizing Custom HQL Queries (CreateQuery) Example
                 /**
                  * By parameterizing the user input, we can succesfully block any HQL injection attempts.
                  */
-                #region NHibernate: Safe when Parameterizing Custom HQL Queries Example
                 case "safeparam":
                     {
                         bool expectedSafe = true;
@@ -89,7 +94,7 @@ namespace DotNetUnitTests
                         ISessionFactory sessionFactory = new Configuration().Configure().BuildSessionFactory();
                         ISession session = sessionFactory.OpenSession();
 
-                        // Creating and receiving the results the custom HQL query
+                        // Creating and receiving the results of the custom HQL query
                         IQuery query = session.CreateQuery("FROM DotNetUnitTests.Student WHERE FirstName = :name");
                         query.SetParameter("name", hqltext);    // safe!
                         IList<Student> students = query.List<Student>();
@@ -104,10 +109,10 @@ namespace DotNetUnitTests
                     }
                 #endregion
 
+                #region NHibernate: Safe when Parameterizing Custom SQL Queries (CreateSQLQuery) Example
                 /**
                  * By parameterizing the user input, we can succesfully block any SQL injection attempts.
                  */
-                #region NHibernate: Safe when Parameterizing Custom HQL Queries Example
                 case "safeparamsql":
                     {
                         bool expectedSafe = true;
@@ -116,7 +121,7 @@ namespace DotNetUnitTests
                         ISessionFactory sessionFactory = new Configuration().Configure().BuildSessionFactory();
                         ISession session = sessionFactory.OpenSession();
 
-                        // Creating and receiving the results the custom SQL query
+                        // Creating and receiving the results of the custom SQL query
                         ISQLQuery query = session.CreateSQLQuery("SELECT * FROM Student WHERE FirstName = :name");
                         query.AddEntity(typeof(Student));
                         query.SetParameter("name", hqltext);    // safe!
