@@ -819,7 +819,7 @@ namespace DotNetUnitTests
                     }
                 #endregion
 
-                // Default case
+                // default case
                 default:
                     Response.Write("Error: Test case not found");
                     break;
