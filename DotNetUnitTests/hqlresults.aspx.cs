@@ -23,6 +23,9 @@ namespace DotNetUnitTests
                     }*/
                 #endregion
 
+                /**
+                 * By doing string concatenation in the CreateQuery method, the HQL query is just as unsafe as any unsafe SQL query
+                 */
                 #region NHibernate: Unsafe when Using String Concatenation on Custom HQL Queries Example
                 case "unsafe":
                     {
@@ -33,7 +36,7 @@ namespace DotNetUnitTests
                         ISession session = sessionFactory.OpenSession();
 
                         // Creating and receiving the results the custom HQL query
-                        IQuery query = session.CreateQuery("FROM DotNetUnitTests.Student WHERE FirstName = '" + hqltext + "';");
+                        IQuery query = session.CreateQuery("FROM DotNetUnitTests.Student WHERE FirstName = '" + hqltext + "';");    // unsafe!
                         IList<object> students = query.List<object>();
 
                         // testing the result
@@ -43,13 +46,28 @@ namespace DotNetUnitTests
                     }
                 #endregion
 
+                /**
+                 * By parameterizing the user input, we can succesfully block any HQL injection attempts
+                 */
                 #region NHibernate: Safe when Parameterizing Custom HQL Queries Example
-                /*case "safeparam":
+                case "safeparam":
                     {
                         bool expectedSafe = true;
 
+                        // Creating the database session
+                        ISessionFactory sessionFactory = new Configuration().Configure().BuildSessionFactory();
+                        ISession session = sessionFactory.OpenSession();
+
+                        // Creating and receiving the results the custom HQL query
+                        IQuery query = session.CreateQuery("FROM DotNetUnitTests.Student WHERE FirstName = :name");
+                        query.SetParameter("name", hqltext);    // safe!
+                        IList<object> students = query.List<object>();
+
+                        // testing the result
+                        TestResults(students, hqltext, expectedSafe);
+
                         break;
-                    }*/
+                    }
                 #endregion
 
                 // default case
@@ -66,7 +84,12 @@ namespace DotNetUnitTests
         {
             // using the default injection
             if (hqltext.Equals("Bobby' OR 'a'='a"))
-                PrintResults(expectedSafe, false, false, students);
+            {
+                if (expectedSafe)
+                    PrintResults(expectedSafe, true, false, students);
+                else
+                    PrintResults(expectedSafe, false, false, students);
+            }
 
             // using a custom injection that uses a semicolon or apostrophe
             else if (hqltext.Contains(";") || hqltext.Contains("'"))
@@ -94,7 +117,12 @@ namespace DotNetUnitTests
             Response.Write("Actual result: " + (actuallySafe ? "NHibernate is safe! 😊" : "Unsafe query was injected! 😭") + "<br />");
             Response.Write("</h3>");
             if (!custom)
-                Response.Write("<b>" + "Query Result (should return all Student entries instead of just Bobby):" + "</b>" + "<br />");
+            {
+                if (actuallySafe)
+                    Response.Write("<b>" + "Query Result (should contain the Student where the first name is <mark>Bobby' OR 'a'='a</mark>):" + "</b>" + "<br />");
+                else
+                    Response.Write("<b>" + "Query Result (should return all Student entries instead of just Bobby):" + "</b>" + "<br />");
+            }
             else
                 Response.Write("<b>" + "Result of your custom query:" + "</b>" + "<br />");
 
