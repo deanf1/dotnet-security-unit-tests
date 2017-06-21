@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DotNetUnitTests
+﻿namespace DotNetUnitTests
 {
     public class Student
     {
