@@ -97,7 +97,7 @@
 <br /><br />
 References (note: test results in references may not be accurate to the test results here):
 <ol>
-    <li><a href="https://www.owasp.org/index.php/XML_External_Entity_(XXE)_Prevention_Cheat_Sheet#.NET">OWASP XML External Entity (XXE) Prevention Cheat Sheet</a><br /></li>
+    <li><a href="https://www.owasp.org/index.php/XML_External_Entity_(XXE)_Prevention_Cheat_Sheet#.NET">OWASP XML External Entity (XXE) Prevention Cheat Sheet</a></li>
     <li><a href="https://www.jardinesoftware.net/2016/05/26/xxe-and-net/">"XXE and .NET" by James Jardine</a></li>
     <li><a href="https://www.jardinesoftware.net/2016/09/12/xxe-in-net-and-xpathdocument/">"XXE in .NET and XPathDocument" by James Jardine</a></li>
     <li><a href="https://blogs.msdn.microsoft.com/xmlteam/2005/11/16/introducing-xslcompiledtransform/">Microsoft XML Team: Introducing XslCompiledTransform</a></li>
