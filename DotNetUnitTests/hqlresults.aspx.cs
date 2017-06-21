@@ -1,6 +1,7 @@
 ﻿using System;
 using NHibernate;
 using NHibernate.Cfg;
+using NHibernate.Criterion;
 using System.Collections.Generic;
 
 namespace DotNetUnitTests
@@ -18,14 +19,27 @@ namespace DotNetUnitTests
                 /**
                  * By using NHibernate's built-in functions that aim to make executing querys more object-oriented, the input query is inherently parameterized.
                  */
-                /*case "safedefault":
+                case "safedefault":
                     {
                         bool expectedSafe = true;
 
-                        
+                        // creating the database session
+                        ISessionFactory sessionFactory = new Configuration().Configure().BuildSessionFactory();
+                        ISession session = sessionFactory.OpenSession();
+
+                        // creating and receiving the results of the HQL query
+                        ICriteria criteria = session.CreateCriteria<Student>();
+                        criteria.Add(NHibernate.Criterion.Expression.Eq("FirstName", hqltext));   // safe!
+                        IList<Student> students = criteria.List<Student>();
+
+                        // testing the result
+                        TestResults(students, hqltext, expectedSafe);
+
+                        session.Close();
+                        sessionFactory.Close();
 
                         break;
-                    }*/
+                    }
                 #endregion
 
                 #region NHibernate: Unsafe when Using String Concatenation on Custom HQL Queries (CreateQuery) Example
@@ -36,11 +50,11 @@ namespace DotNetUnitTests
                     {
                         bool expectedSafe = false;
 
-                        // Creating the database session
+                        // creating the database session
                         ISessionFactory sessionFactory = new Configuration().Configure().BuildSessionFactory();
                         ISession session = sessionFactory.OpenSession();
 
-                        // Creating and receiving the results of the custom HQL query
+                        // creating and receiving the results of the custom HQL query
                         IQuery query = session.CreateQuery("FROM DotNetUnitTests.Student WHERE FirstName = '" + hqltext + "';");    // unsafe!
                         IList<Student> students = query.List<Student>();
 
@@ -62,11 +76,11 @@ namespace DotNetUnitTests
                     {
                         bool expectedSafe = false;
 
-                        // Creating the database session
+                        // creating the database session
                         ISessionFactory sessionFactory = new Configuration().Configure().BuildSessionFactory();
                         ISession session = sessionFactory.OpenSession();
 
-                        // Creating and receiving the results of the custom SQL query
+                        // creating and receiving the results of the custom SQL query
                         ISQLQuery query = session.CreateSQLQuery("SELECT * FROM Student WHERE FirstName = '" + hqltext + "';");    // unsafe!
                         query.AddEntity(typeof(Student));
 
@@ -90,11 +104,11 @@ namespace DotNetUnitTests
                     {
                         bool expectedSafe = true;
 
-                        // Creating the database session
+                        // creating the database session
                         ISessionFactory sessionFactory = new Configuration().Configure().BuildSessionFactory();
                         ISession session = sessionFactory.OpenSession();
 
-                        // Creating and receiving the results of the custom HQL query
+                        // creating and receiving the results of the custom HQL query
                         IQuery query = session.CreateQuery("FROM DotNetUnitTests.Student WHERE FirstName = :name");
                         query.SetParameter("name", hqltext);    // safe!
                         IList<Student> students = query.List<Student>();
@@ -117,11 +131,11 @@ namespace DotNetUnitTests
                     {
                         bool expectedSafe = true;
 
-                        // Creating the database session
+                        // creating the database session
                         ISessionFactory sessionFactory = new Configuration().Configure().BuildSessionFactory();
                         ISession session = sessionFactory.OpenSession();
 
-                        // Creating and receiving the results of the custom SQL query
+                        // creating and receiving the results of the custom SQL query
                         ISQLQuery query = session.CreateSQLQuery("SELECT * FROM Student WHERE FirstName = :name");
                         query.AddEntity(typeof(Student));
                         query.SetParameter("name", hqltext);    // safe!
