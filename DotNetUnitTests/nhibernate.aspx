@@ -20,7 +20,9 @@
 <ul>
     <li><a href="hqlview.aspx?title=Safe%20NHibernate&test=NHibernate%3A%20Safe%20when%20Using%20Built-in%20Functions%20Example&var=safedefault">Safe when Using Built-in Functions Example</a></li>
     <li><a href="hqlview.aspx?title=Unsafe%20NHibernate&test=NHibernate%3A%20Unsafe%20when%20Using%20String%20Concatenation%20on%20Custom%20HQL%20Queries%20Example&var=unsafe">Unsafe when Using String Concatenation on Custom HQL Queries Example</a></li>
+    <li><a href="hqlview.aspx?title=Unsafe%20NHibernate&test=NHibernate%3A%20Unsafe%20when%20Using%20String%20Concatenation%20on%20Custom%20SQL%20Queries%20Example&var=unsafesql">Unsafe when Using String Concatenation on Custom SQL Queries Example</a></li>
     <li><a href="hqlview.aspx?title=Safe%20NHibernate&test=NHibernate%3A%20Safe%20when%20Parameterizing%20Custom%20HQL%20Queries%20Example&var=safeparam">Safe when Parameterizing Custom HQL Queries Example</a></li>
+    <li><a href="hqlview.aspx?title=Safe%20NHibernate&test=NHibernate%3A%20Safe%20when%20Parameterizing%20Custom%20SQL%20Queries%20Example&var=safeparamsql">Safe when Parameterizing Custom SQL Queries Example</a></li>
 </ul>
 
 <br /><br />

@@ -24,7 +24,7 @@ namespace DotNetUnitTests
                 #endregion
 
                 /**
-                 * By doing string concatenation in the CreateQuery method, the HQL query is just as unsafe as any unsafe SQL query
+                 * By doing string concatenation in the CreateQuery method, the HQL query is just as unsafe as any unsafe SQL query.
                  */
                 #region NHibernate: Unsafe when Using String Concatenation on Custom HQL Queries Example
                 case "unsafe":
@@ -37,17 +37,48 @@ namespace DotNetUnitTests
 
                         // Creating and receiving the results the custom HQL query
                         IQuery query = session.CreateQuery("FROM DotNetUnitTests.Student WHERE FirstName = '" + hqltext + "';");    // unsafe!
-                        IList<object> students = query.List<object>();
+                        IList<Student> students = query.List<Student>();
 
                         // testing the result
                         TestResults(students, hqltext, expectedSafe);
+
+                        session.Close();
+                        sessionFactory.Close();
 
                         break;
                     }
                 #endregion
 
                 /**
-                 * By parameterizing the user input, we can succesfully block any HQL injection attempts
+                 * By doing string concatenation in the CreateSQLQuery method, the SQL query is unsafe.
+                 */
+                #region NHibernate: Unsafe when Using String Concatenation on Custom SQL Queries Example
+                case "unsafesql":
+                    {
+                        bool expectedSafe = false;
+
+                        // Creating the database session
+                        ISessionFactory sessionFactory = new Configuration().Configure().BuildSessionFactory();
+                        ISession session = sessionFactory.OpenSession();
+
+                        // Creating and receiving the results the custom HQL query
+                        ISQLQuery query = session.CreateSQLQuery("SELECT * FROM Student WHERE FirstName = '" + hqltext + "';");    // unsafe!
+                        query.AddEntity(typeof(Student));
+
+                        IList<Student> students = query.List<Student>();
+
+                        // testing the result
+                        TestResults(students, hqltext, expectedSafe);
+
+                        session.Close();
+                        sessionFactory.Close();
+
+                        break;
+                    }
+                #endregion
+
+                /**
+                 * By parameterizing the user input, we can succesfully block any HQL injection attempts.
                  */
                 #region NHibernate: Safe when Parameterizing Custom HQL Queries Example
                 case "safeparam":
@@ -61,10 +92,42 @@ namespace DotNetUnitTests
                         // Creating and receiving the results the custom HQL query
                         IQuery query = session.CreateQuery("FROM DotNetUnitTests.Student WHERE FirstName = :name");
                         query.SetParameter("name", hqltext);    // safe!
-                        IList<object> students = query.List<object>();
+                        IList<Student> students = query.List<Student>();
 
                         // testing the result
                         TestResults(students, hqltext, expectedSafe);
+
+                        session.Close();
+                        sessionFactory.Close();
+
+                        break;
+                    }
+                #endregion
+
+                /**
+                 * By parameterizing the user input, we can succesfully block any SQL injection attempts.
+                 */
+                #region NHibernate: Safe when Parameterizing Custom HQL Queries Example
+                case "safeparamsql":
+                    {
+                        bool expectedSafe = true;
+
+                        // Creating the database session
+                        ISessionFactory sessionFactory = new Configuration().Configure().BuildSessionFactory();
+                        ISession session = sessionFactory.OpenSession();
+
+                        // Creating and receiving the results the custom HQL query
+                        ISQLQuery query = session.CreateSQLQuery("SELECT * FROM Student WHERE FirstName = :name");
+                        query.AddEntity(typeof(Student));
+                        query.SetParameter("name", hqltext);    // safe!
+
+                        IList<Student> students = query.List<Student>();
+
+                        // testing the result
+                        TestResults(students, hqltext, expectedSafe);
+
+                        session.Close();
+                        sessionFactory.Close();
 
                         break;
                     }
@@ -80,7 +143,7 @@ namespace DotNetUnitTests
         /**
          *  Tests the result and changes the print type accordingly
          */
-        private void TestResults(IList<object> students, string hqltext, bool expectedSafe)
+        private void TestResults(IList<Student> students, string hqltext, bool expectedSafe)
         {
             // using the default injection
             if (hqltext.Equals("Bobby' OR 'a'='a"))
@@ -110,7 +173,7 @@ namespace DotNetUnitTests
         /**
          *  Prints the results
          */
-        private void PrintResults(bool expectedSafe, bool actuallySafe, bool custom, IList<object> students)
+        private void PrintResults(bool expectedSafe, bool actuallySafe, bool custom, IList<Student> students)
         {
             Response.Write("<h3>");
             Response.Write("Expected result: " + (expectedSafe ? "Safe" : "Unsafe") + "<br />");
