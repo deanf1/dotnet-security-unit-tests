@@ -9,7 +9,8 @@
 </head>
 <body>
 
-<h1>XXE Vulnerability Tests for .NET XML Parsers</h1>
+<h1>XXE Injection Vulnerability Tests for .NET XML Parsers</h1>
+<a href="index.aspx">.NET XXE Injection Tests</a> | <a href="nhibernate.aspx">NHibernate Injection Tests</a>
 <%  Response.Write("<h3>");
     Response.Write("Current .NET Framework Version: " + HttpRuntime.TargetFramework.ToString());
     if (HttpRuntime.TargetFramework.Minor >= 6 || HttpRuntime.TargetFramework.ToString().Equals("4.5.2"))
@@ -23,72 +24,72 @@
 <ul>
     <li><a href="https://msdn.microsoft.com/en-us/library/system.xml.linq(v=vs.110).aspx">System.Xml.<b>Linq</b> (link to MSDN docs)</a>
         <ul>
-            <li><a href="xmlview.aspx?title=Safe%20LINQ&test=XElement%3A%20Safe%20by%20Default%20Example&var=linqxelementsafe">XElement: Safe by Default Example</a></li>
-            <li><a href="xmlview.aspx?title=Safe%20LINQ&test=XDocument%3A%20Safe%20by%20Default%20Example&var=linqxdocumentsafe">XDocument: Safe by Default Example</a></li>
-            <li><a href="xmlview.aspx?title=Safe%20LINQ&test=Unsafe%20when%20Providing%20an%20Unsafe%20XML%20Parser%20Example&var=linqxdocumentunsafe">XDocument: Unsafe when Providing an Unsafe XML Parser Example</a></li>
+            <li><a href="xmlview.aspx?title=Safe%20LINQ&test=LINQ%3A%20XElement%3A%20Safe%20by%20Default%20Example&var=linqxelementsafe">XElement: Safe by Default Example</a></li>
+            <li><a href="xmlview.aspx?title=Safe%20LINQ&test=LINQ%3A%20XDocument%3A%20Safe%20by%20Default%20Example&var=linqxdocumentsafe">XDocument: Safe by Default Example</a></li>
+            <li><a href="xmlview.aspx?title=Safe%20LINQ&test=LINQ%3A%20XDocument%3A%20Unsafe%20when%20Providing%20an%20Unsafe%20XML%20Parser%20Example&var=linqxdocumentunsafe">XDocument: Unsafe when Providing an Unsafe XML Parser Example</a></li>
         </ul>
     <br /></li>
     
     <li><a href="https://msdn.microsoft.com/en-us/library/system.xml.xmldictionaryreader(v=vs.110).aspx">System.Xml.<b>XmlDictionaryReader</b> (link to MSDN docs)</a>
         <ul>
-            <li><a href="xmlview.aspx?title=Safe%20XmlDictionaryReader&test=Safe%20by%20Default%20Example&var=xmldictionaryreadersafe">Safe by Default Example</a></li>
-            <li><a href="xmlview.aspx?title=Unsafe%20XmlDictionaryReader&test=Unsafe%20when%20Providing%20an%20Unsafe%20XML%20Parser%20Example&var=xmldictionaryreaderunsafe">Unsafe when Providing an Unsafe XML Parser Example</a></li>
+            <li><a href="xmlview.aspx?title=Safe%20XmlDictionaryReader&test=XmlDictionaryReader%3A%20Safe%20by%20Default%20Example&var=xmldictionaryreadersafe">Safe by Default Example</a></li>
+            <li><a href="xmlview.aspx?title=Unsafe%20XmlDictionaryReader&test=XmlDictionaryReader%3A%20Unsafe%20when%20Providing%20an%20Unsafe%20XML%20Parser%20Example&var=xmldictionaryreaderunsafe">Unsafe when Providing an Unsafe XML Parser Example</a></li>
         </ul>
     <br /></li>
 
     <li><a href="https://msdn.microsoft.com/en-us/library/system.xml.xmldocument(v=vs.110).aspx">System.Xml.<b>XmlDocument</b> (link to MSDN docs)</a>
         <ul>
             <%  if (HttpRuntime.TargetFramework.Minor >= 6 || HttpRuntime.TargetFramework.ToString().Equals("4.5.2"))
-                    Response.Write("<li><a href=\"xmlview.aspx?title=Safe%20XmlDocument&test=Safe%20by%20Default%20in%20Current%20.NET%20Version%20%284.5.2%20and%20above%29%20Example&var=xmldocumentsafe452\">Safe by Default in Current .NET Version (4.5.2 and above) Example</a></li>");
+                    Response.Write("<li><a href=\"xmlview.aspx?title=Safe%20XmlDocument&test=XmlDocument%3A%20Safe%20by%20Default%20in%20Current%20.NET%20Version%20%284.5.2%20and%20above%29%20Example&var=xmldocumentsafe452\">Safe by Default in Current .NET Version (4.5.2 and above) Example</a></li>");
                 else
-                    Response.Write("<li><a href=\"xmlview.aspx?title=Unsafe%20XmlDocument&test=Unsafe%20by%20Default%20in%20Current%20.NET%20Version%20%284.5.1%20and%20lower%29%20Example&var=xmldocumentsafe452\">Unsafe by Default in Current .NET Version (4.5.1 and lower) Example</a></li>");
+                    Response.Write("<li><a href=\"xmlview.aspx?title=Unsafe%20XmlDocument&test=XmlDocument%3A%20Unsafe%20by%20Default%20in%20Current%20.NET%20Version%20%284.5.1%20and%20lower%29%20Example&var=xmldocumentsafe452\">Unsafe by Default in Current .NET Version (4.5.1 and lower) Example</a></li>");
             %>
-            <li><a href="xmlview.aspx?title=Safe%20XmlDocument&test=Safe%20when%20Setting%20the%20XmlResolver%20to%20null%20Example&var=xmldocumentsafe">Safe when Setting the XmlResolver to null Example</a></li>
-            <li><a href="xmlview.aspx?title=Unsafe%20XmlDocument&test=Unsafe%20when%20Resolving%20Entities%20Manually%20Example&var=xmldocumentunsafe">Unsafe when Resolving Entities Manually Example</a></li>
+            <li><a href="xmlview.aspx?title=Safe%20XmlDocument&test=XmlDocument%3A%20Safe%20when%20Setting%20the%20XmlResolver%20to%20null%20Example&var=xmldocumentsafe">Safe when Setting the XmlResolver to null Example</a></li>
+            <li><a href="xmlview.aspx?title=Unsafe%20XmlDocument&test=XmlDocument%3A%20Unsafe%20when%20Resolving%20Entities%20Manually%20Example&var=xmldocumentunsafe">Unsafe when Resolving Entities Manually Example</a></li>
         </ul>
     <br /></li>
 
     <li><a href="https://msdn.microsoft.com/en-us/library/system.xml.xmlnodereader(v=vs.110).aspx">System.Xml.<b>XmlNodeReader</b> (link to MSDN docs)</a>
         <ul>
-            <li><a href="xmlview.aspx?title=Safe%20XmlNodeReader&test=Safe%20By%20Default%20Example&var=xmlnodereadersafe">Safe by Default Example</a></li>
-            <li><a href="xmlview.aspx?title=Safe%20XmlNodeReader&test=Safe%20when%20Wrapping%20in%20an%20Unsafe%20XmlReader%20Example&var=xmlnodereadersafexmlreader">Safe when Wrapping in an Unsafe XmlReader Example</a></li>
+            <li><a href="xmlview.aspx?title=Safe%20XmlNodeReader&test=XmlNodeReader%3A%20Safe%20By%20Default%20Example&var=xmlnodereadersafe">Safe by Default Example</a></li>
+            <li><a href="xmlview.aspx?title=Safe%20XmlNodeReader&test=XmlNodeReader%3A%20Safe%20when%20Wrapping%20in%20an%20Unsafe%20XmlReader%20Example&var=xmlnodereadersafexmlreader">Safe when Wrapping in an Unsafe XmlReader Example</a></li>
         </ul>
     <br /></li>
 
     <li><a href="https://msdn.microsoft.com/en-us/library/system.xml.xmlreader(v=vs.110).aspx">System.Xml.<b>XmlReader</b> (link to MSDN docs)</a>
         <ul>
-            <li><a href="xmlview.aspx?title=Safe%20XmlReader&test=Safe%20By%20Default%20Example&var=xmlreadersafe">Safe by Default Example</a></li>
-            <li><a href="xmlview.aspx?title=Unsafe%20XmlReader&test=Unsafe%20when%20Resolving%20Entities%20Manually%20Example&var=xmlreaderunsafe">Unsafe when Resolving Entities Manually Example</a></li>
+            <li><a href="xmlview.aspx?title=Safe%20XmlReader&test=XmlReader%3A%20Safe%20By%20Default%20Example&var=xmlreadersafe">Safe by Default Example</a></li>
+            <li><a href="xmlview.aspx?title=Unsafe%20XmlReader&test=XmlReader%3A%20Unsafe%20when%20Resolving%20Entities%20Manually%20Example&var=xmlreaderunsafe">Unsafe when Resolving Entities Manually Example</a></li>
         </ul>
     <br /></li>
 	
     <li><a href="https://msdn.microsoft.com/en-us/library/system.xml.xmltextreader(v=vs.110).aspx">System.Xml.<b>XmlTextReader</b> (link to MSDN docs)</a>
         <ul>
             <%  if (HttpRuntime.TargetFramework.Minor >= 6 || HttpRuntime.TargetFramework.ToString().Equals("4.5.2"))
-                    Response.Write("<li><a href=\"xmlview.aspx?title=Safe%20XmlTextReader&test=Safe%20by%20Default%20in%20Current%20.NET%20Version%20%284.5.2%20and%20above%29%20Example&var=xmltextreadersafe452\">Safe by Default in Current .NET Version (4.5.2 and above) Example</a></li>");
+                    Response.Write("<li><a href=\"xmlview.aspx?title=Safe%20XmlTextReader&test=XmlTextReader%3A%20Safe%20by%20Default%20in%20Current%20.NET%20Version%20%284.5.2%20and%20above%29%20Example&var=xmltextreadersafe452\">Safe by Default in Current .NET Version (4.5.2 and above) Example</a></li>");
                 else
-                    Response.Write("<li><a href=\"xmlview.aspx?title=Unsafe%20XmlTextReader&test=Unsafe%20by%20Default%20in%20Current%20.NET%20Version%20%284.5.1%20and%20lower%29%20Example&var=xmltextreadersafe452\">Unsafe by Default in Current .NET Version (4.5.1 and lower) Example</a></li>");
+                    Response.Write("<li><a href=\"xmlview.aspx?title=Unsafe%20XmlTextReader&test=XmlTextReader%3A%20Unsafe%20by%20Default%20in%20Current%20.NET%20Version%20%284.5.1%20and%20lower%29%20Example&var=xmltextreadersafe452\">Unsafe by Default in Current .NET Version (4.5.1 and lower) Example</a></li>");
             %>
-            <li><a href="xmlview.aspx?title=Safe%20XmlTextReader&test=Safe%20when%20Prohibiting%20DTDs%20Example&var=xmltextreadersafe">Safe when Prohibiting DTDs Example</a></li>
-            <li><a href="xmlview.aspx?title=Unsafe%20XmlTextReader&test=Unsafe%20when%20Resolving%20Entities%20Manually%20Example&var=xmltextreaderunsafe">Unsafe when Resolving Entities Manually Example</a></li>
+            <li><a href="xmlview.aspx?title=Safe%20XmlTextReader&test=XmlTextReader%3A%20Safe%20when%20Prohibiting%20DTDs%20Example&var=xmltextreadersafe">Safe when Prohibiting DTDs Example</a></li>
+            <li><a href="xmlview.aspx?title=Unsafe%20XmlTextReader&test=XmlTextReader%3A%20Unsafe%20when%20Resolving%20Entities%20Manually%20Example&var=xmltextreaderunsafe">Unsafe when Resolving Entities Manually Example</a></li>
         </ul>
     <br /></li>
 	
     <li><a href="https://msdn.microsoft.com/en-us/library/system.xml.xpath.xpathnavigator(v=vs.110).aspx">System.Xml.XPath.<b>XPathNavigator</b> (link to MSDN docs)</a>
         <ul>
             <%  if (HttpRuntime.TargetFramework.Minor >= 6 || HttpRuntime.TargetFramework.ToString().Equals("4.5.2"))
-                    Response.Write("<li><a href=\"xmlview.aspx?title=Safe%20XPathNavigator&test=Safe%20by%20Default%20in%20Current%20.NET%20Version%20%284.5.2%20and%20above%29%20Example&var=xpathnavigatorsafe452\">Safe by Default in Current .NET Version (4.5.2 and above) Example</a></li>");
+                    Response.Write("<li><a href=\"xmlview.aspx?title=Safe%20XPathNavigator&test=XPathNavigator%3A%20Safe%20by%20Default%20in%20Current%20.NET%20Version%20%284.5.2%20and%20above%29%20Example&var=xpathnavigatorsafe452\">Safe by Default in Current .NET Version (4.5.2 and above) Example</a></li>");
                 else
-                    Response.Write("<li><a href=\"xmlview.aspx?title=Unsafe%20XPathNavigator&test=Unsafe%20by%20Default%20in%20Current%20.NET%20Version%20%284.5.1%20and%20lower%29%20Example&var=xpathnavigatorsafe452\">Unsafe by Default in Current .NET Version (4.5.1 and lower) Example</a></li>");
+                    Response.Write("<li><a href=\"xmlview.aspx?title=Unsafe%20XPathNavigator&test=XPathNavigator%3A%20Unsafe%20by%20Default%20in%20Current%20.NET%20Version%20%284.5.1%20and%20lower%29%20Example&var=xpathnavigatorsafe452\">Unsafe by Default in Current .NET Version (4.5.1 and lower) Example</a></li>");
             %>
-            <li><a href="xmlview.aspx?title=Safe%20XPathNavigator&test=Safe%20when%20Providing%20a%20Safe%20XML%20Parser%20Example&var=xpathnavigatorsafe">Safe when Providing a Safe XML Parser Example</a></li>
+            <li><a href="xmlview.aspx?title=Safe%20XPathNavigator&test=XPathNavigator%3A%20Safe%20when%20Providing%20a%20Safe%20XML%20Parser%20Example&var=xpathnavigatorsafe">Safe when Providing a Safe XML Parser Example</a></li>
         </ul>
     <br /></li>
 	
     <li><a href="https://msdn.microsoft.com/en-us/library/system.xml.xsl.xslcompiledtransform(v=vs.110).aspx">System.Xml.Xsl.<b>XslCompiledTransform</b> (link to MSDN docs)</a>
         <ul>
-            <li><a href="xmlview.aspx?title=Safe%20XslCompiledTransform&test=Safe%20By%20Default%20Example&var=xslcompiledtransformsafe">Safe by Default Example</a></li>
-            <li><a href="xmlview.aspx?title=Unsafe%20XslCompiledTransform&test=Unsafe%20when%20Providing%20an%20Unsafe%20XML%20Parser%20Example&var=xslcompiledtransformunsafe">Unsafe when Providing an Unsafe XML Parser Example</a></li>
+            <li><a href="xmlview.aspx?title=Safe%20XslCompiledTransform&test=XslCompiledTransform%3A%20Safe%20By%20Default%20Example&var=xslcompiledtransformsafe">Safe by Default Example</a></li>
+            <li><a href="xmlview.aspx?title=Unsafe%20XslCompiledTransform&test=XslCompiledTransform%3A%20Unsafe%20when%20Providing%20an%20Unsafe%20XML%20Parser%20Example&var=xslcompiledtransformunsafe">Unsafe when Providing an Unsafe XML Parser Example</a></li>
         </ul>
     </li>
 </ul>
