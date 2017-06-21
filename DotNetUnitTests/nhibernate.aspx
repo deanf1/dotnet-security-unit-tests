@@ -28,7 +28,8 @@
 <br /><br />
 References:
 <ol>
-    <li><a href="https://www.owasp.org/index.php/Hibernate">OWASP: Hibernate</a><br /></li>
+    <li><a href="http://nhibernate.info/doc/index.html">NHibernate Docs</a></li>
+    <li><a href="https://www.owasp.org/index.php/Hibernate">OWASP: Hibernate</a></li>
     <li><a href="https://www.owasp.org/index.php/SQL_Injection">OWASP: SQL Injection</a></li>
 </ol>
 
