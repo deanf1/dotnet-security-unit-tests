@@ -13,7 +13,7 @@
 <a href="index.aspx">.NET XXE Injection Tests</a> | <a href="nhibernate.aspx">NHibernate Injection Tests</a>
 <%  Response.Write("<h3>");
     Response.Write("Current .NET Framework Version: " + HttpRuntime.TargetFramework.ToString());
-    Response.Write("<br />" + "Unsafe Tests: 2" + "<br />" + "Safe Tests: 3");
+    Response.Write("<br />" + "Unsafe Tests: 3" + "<br />" + "Safe Tests: 4");
     Response.Write("</h3>");
 %>
 
