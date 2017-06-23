@@ -1,7 +1,6 @@
 ﻿using System;
 using NHibernate;
 using NHibernate.Cfg;
-using NHibernate.Criterion;
 using System.Collections.Generic;
 
 namespace DotNetUnitTests
@@ -13,9 +12,10 @@ namespace DotNetUnitTests
          */
         private void PerformTest(string hqltext)
         {
+
             switch (Request.QueryString["var"])
             {
-                #region NHibernate: Safe when Using Built-in Functions Example
+                #region SELECT: Safe when Using Built-in Functions Example
                 /**
                  * By using NHibernate's built-in functions that aim to make executing querys more object-oriented, the input query is inherently parameterized.
                  */
@@ -42,9 +42,9 @@ namespace DotNetUnitTests
                     }
                 #endregion
 
-                #region NHibernate: Unsafe when Using String Concatenation on Custom HQL Queries (CreateQuery) Example
+                #region SELECT: Unsafe when Using String Concatenation on Custom HQL Queries (CreateQuery) Example
                 /**
-                 * By doing string concatenation in the CreateQuery method, the HQL query is just as unsafe as any unsafe SQL query.
+                 * By doing string concatenation in the CreateQuery method, the HQL query is just as vulnerable to injection as any unsafe SQL query.
                  */
                 case "unsafe":
                     {
@@ -55,7 +55,7 @@ namespace DotNetUnitTests
                         ISession session = sessionFactory.OpenSession();
 
                         // creating and receiving the results of the custom HQL query
-                        IQuery query = session.CreateQuery("FROM DotNetUnitTests.Student WHERE FirstName = '" + hqltext + "';");    // unsafe!
+                        IQuery query = session.CreateQuery("FROM Student WHERE FirstName = '" + hqltext + "';");    // unsafe!
                         IList<Student> students = query.List<Student>();
 
                         // testing the result
@@ -68,9 +68,9 @@ namespace DotNetUnitTests
                     }
                 #endregion
 
-                #region NHibernate: Unsafe when Using String Concatenation on Custom SQL Queries (CreateSQLQuery) Example
+                #region SELECT: Unsafe when Using String Concatenation on Custom SQL Queries (CreateSQLQuery) Example
                 /**
-                 * By doing string concatenation in the CreateSQLQuery method, the SQL query is unsafe.
+                 * By doing string concatenation in the CreateSQLQuery method, the SQL query is vulnerable to injection.
                  */
                 case "unsafesql":
                     {
@@ -96,7 +96,7 @@ namespace DotNetUnitTests
                     }
                 #endregion
 
-                #region NHibernate: Safe when Parameterizing Custom HQL Queries (CreateQuery) Example
+                #region SELECT: Safe when Parameterizing Custom HQL Queries (CreateQuery) Example
                 /**
                  * By parameterizing the user input, we can succesfully block any HQL injection attempts.
                  */
@@ -109,7 +109,7 @@ namespace DotNetUnitTests
                         ISession session = sessionFactory.OpenSession();
 
                         // creating and receiving the results of the custom HQL query
-                        IQuery query = session.CreateQuery("FROM DotNetUnitTests.Student WHERE FirstName = :name");
+                        IQuery query = session.CreateQuery("FROM Student WHERE FirstName = :name");
                         query.SetParameter("name", hqltext);    // safe!
                         IList<Student> students = query.List<Student>();
 
@@ -123,7 +123,7 @@ namespace DotNetUnitTests
                     }
                 #endregion
 
-                #region NHibernate: Safe when Parameterizing Custom SQL Queries (CreateSQLQuery) Example
+                #region SELECT: Safe when Parameterizing Custom SQL Queries (CreateSQLQuery) Example
                 /**
                  * By parameterizing the user input, we can succesfully block any SQL injection attempts.
                  */
@@ -152,6 +152,117 @@ namespace DotNetUnitTests
                     }
                 #endregion
 
+                #region DELETE: Safe when Using Built-in Functions Example [TEST REMOVED]
+                /**
+                 * By parameterizing the user input, we can succesfully block any SQL injection attempts.
+                 * NOTE: TEST REMOVED: Delete(object obj) only works when first fetching existing objects from the table.
+                 *                     You can not delete a copy of the object, it has to be the same one.
+                 *                     Therefore, this test doesn't actually work.
+                 */
+                case "deletesafedefault":
+                    {
+                        bool expectedSafe = true;
+
+                        // creating the database session
+                        ISessionFactory sessionFactory = new Configuration().Configure().BuildSessionFactory();
+                        ISession session = sessionFactory.OpenSession();
+
+                        // inserting the User students that will (hopefully) be deleted
+                        Student test = new Student("User", "Test", "test", "deleteme");
+                        Student target = new Student("User", "Target", "target", "deleteme2");
+                        session.Save(test);
+                        session.Save(target);
+
+                        // delete the inputted user (doesn't work)
+                        Student input = new Student();
+                        input.FirstName = hqltext;
+                        session.Delete(input);
+                        session.Flush();
+
+                        // testing the result
+                        //TestResults(students, hqltext, expectedSafe);
+
+                        session.Close();
+                        sessionFactory.Close();
+
+                        break;
+                    }
+                #endregion
+
+                #region DELETE: Unsafe when Using String Concatenation on Custom HQL Queries Example
+                /**
+                 * By doing string concatenation in the Delete method, the query is vulnerable to injection.
+                 */
+                case "deleteunsafe":
+                    {
+                        bool expectedSafe = false;
+
+                        // creating the database session
+                        ISessionFactory sessionFactory = new Configuration().Configure().BuildSessionFactory();
+                        ISession session = sessionFactory.OpenSession();
+
+                        // inserting the User students that will (hopefully) be deleted
+                        Student test = new Student("User", "Test", "test", "deleteme");
+                        Student target = new Student("User", "Target", "target", "deleteme2");
+                        session.Save(test);
+                        session.Save(target);
+
+                        // delete the inputted user
+                        session.Delete("FROM Student WHERE FirstName = '" + hqltext + "';");
+                        session.Flush();
+
+                        // getting the User students to see what the results of the DELETE were
+                        IQuery query = session.CreateQuery("FROM Student WHERE FirstName = 'Test' OR FirstName = 'Target';");
+                        IList<Student> students = query.List<Student>();
+
+                        // testing the result
+                        TestResults(students, hqltext, expectedSafe);
+
+                        session.Close();
+                        sessionFactory.Close();
+
+                        break;
+                    }
+                #endregion
+
+                #region DELETE: Safe when Parameterizing Custom HQL Queries Example
+                /**
+                 * By parameterizing the user input, we can succesfully block any HQL injection attempts. The only way to properly do this is write a delete query in the CreateQuery
+                 * method and add the parameters there. 
+                 */
+                case "deletesafeparam":
+                    {
+                        bool expectedSafe = true;
+
+                        // creating the database session
+                        ISessionFactory sessionFactory = new Configuration().Configure().BuildSessionFactory();
+                        ISession session = sessionFactory.OpenSession();
+
+                        // inserting the User students that will (hopefully) be deleted
+                        Student test = new Student("User", "Test", "test", "deleteme");
+                        Student target = new Student("User", "Target", "target", "deleteme2");
+                        session.Save(test);
+                        session.Save(target);
+
+                        // delete the inputted user
+                        IQuery query = session.CreateQuery("DELETE FROM Student WHERE FirstName = :name");
+                        query.SetParameter("name", hqltext);    // safe!
+                        query.ExecuteUpdate();
+
+                        // getting the User students to see what the results of the DELETE were
+                        IQuery postQuery = session.CreateQuery("FROM Student WHERE FirstName = 'Test' OR FirstName = 'Target';");
+                        IList<Student> students = postQuery.List<Student>();
+
+                        // testing the result
+                        TestResults(students, hqltext, expectedSafe);
+
+                        session.Close();
+                        sessionFactory.Close();
+
+                        break;
+                    }
+                #endregion
+
                 // default case
                 default:
                     Response.Write("Error: Test case not found");
@@ -160,12 +271,12 @@ namespace DotNetUnitTests
         }
 
         /**
-         *  Tests the result and changes the print type accordingly
+         *  Tests the result of the query and changes the print type accordingly
          */
         private void TestResults(IList<Student> students, string hqltext, bool expectedSafe)
         {
             // using the default injection
-            if (hqltext.Equals("Bobby' OR 'a'='a"))
+            if (hqltext.Equals("Bobby' OR 'a'='a") || hqltext.Equals("Test' OR FirstName='Target"))
             {
                 if (expectedSafe)
                     PrintResults(expectedSafe, true, false, students);
@@ -179,8 +290,8 @@ namespace DotNetUnitTests
 
             else
             {
-                // using a custom injection that returns extra rows or deletes entries
-                if (students.Count > 1 || students.Count == 0)
+                // using a custom injection in SELECT that returns extra rows or deletes entries
+                if ((students.Count > 1 || students.Count == 0) && !Request.QueryString["var"].Contains("delete"))
                     PrintResults(expectedSafe, false, true, students);
 
                 // using a query thats safe
@@ -200,10 +311,20 @@ namespace DotNetUnitTests
             Response.Write("</h3>");
             if (!custom)
             {
-                if (actuallySafe)
-                    Response.Write("<b>" + "Query Result (should contain the Student where the first name is <mark>Bobby' OR 'a'='a</mark>):" + "</b>" + "<br />");
+                if (Request.QueryString["var"].Contains("delete"))
+                {
+                    if (actuallySafe)
+                        Response.Write("<b>" + "Query Result (should contain both Test User and Target User):" + "</b>" + "<br />");
+                    else
+                        Response.Write("<b>" + "Query Result (should be an empty table):" + "</b>" + "<br />");
+                }
                 else
-                    Response.Write("<b>" + "Query Result (should return all Student entries instead of just Bobby):" + "</b>" + "<br />");
+                {
+                    if (actuallySafe)
+                        Response.Write("<b>" + "Query Result (should contain the Student where the first name is <mark>Bobby' OR 'a'='a</mark>):" + "</b>" + "<br />");
+                    else
+                        Response.Write("<b>" + "Query Result (should return all Student entries instead of just Bobby):" + "</b>" + "<br />");
+                }
             }
             else
                 Response.Write("<b>" + "Result of your custom query:" + "</b>" + "<br />");
@@ -227,6 +348,7 @@ namespace DotNetUnitTests
         protected void Page_Load(object sender, EventArgs e)
         {
             string hqltext = Request.QueryString["payload"];
+
             PerformTest(hqltext);
         }
     }
