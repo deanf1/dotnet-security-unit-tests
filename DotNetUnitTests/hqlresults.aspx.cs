@@ -156,6 +156,7 @@ namespace DotNetUnitTests
                 /**
                  * By parameterizing the user input, we can succesfully block any SQL injection attempts.
                  * NOTE: TEST REMOVED: Delete(object obj) only works when first fetching existing objects from the table.
+                 *                     I chose not to do this as the saftey would fall back to that SELECT query, making this test irrelevant for DELETE.
                  *                     You can not delete a copy of the object, it has to be the same one.
                  *                     Therefore, this test doesn't actually work.
                  */
