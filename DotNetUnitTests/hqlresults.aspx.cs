@@ -162,7 +162,7 @@ namespace DotNetUnitTests
                  */
                 case "deletesafedefault":
                     {
-                        bool expectedSafe = true;
+                        //bool expectedSafe = true;
 
                         // creating the database session
                         ISessionFactory sessionFactory = new Configuration().Configure().BuildSessionFactory();
