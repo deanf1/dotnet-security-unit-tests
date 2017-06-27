@@ -80,6 +80,7 @@
     <Content Include="App_Data\Sample_log.ldf">
       <DependentUpon>Sample.mdf</DependentUpon>
     </Content>
+    <Content Include="codeview.aspx" />
     <Content Include="hibernate.cfg.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
@@ -106,6 +107,13 @@
     <Content Include="xmlview.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="codeview.aspx.cs">
+      <DependentUpon>codeview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="codeview.aspx.designer.cs">
+      <DependentUpon>codeview.aspx</DependentUpon>
+    </Compile>
     <Compile Include="hqlresults.aspx.cs">
       <DependentUpon>hqlresults.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

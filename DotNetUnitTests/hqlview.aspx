@@ -8,6 +8,8 @@
 </head>
 <body>
     <h1><%= Request.QueryString["test"] %></h1>
+    <a href="codeview.aspx?type=hql&test=<%= Request.QueryString["test"] %>">View code for this test</a>
+    <br /><br />
     <%
         // DELETE statements help text
         if (Request.QueryString["var"].Contains("delete"))

@@ -229,7 +229,7 @@ namespace DotNetUnitTests
                     }
                 #endregion
 
-                #region XmlDocument: Safe by Default in .NET Version 4.5.2 and above / Unsafe by Default in .NET Version 4.5.1 and lower Example
+                #region XmlDocument: Safe by Default in Current .NET Version (4.5.2 and above) Example / XmlDocument: Unsafe by Default in Current .NET Version (4.5.1 and lower) Example
                 /**
                  * In .NET version 4.5.2, Microsoft made a change to parsers that implement an XmlResolver object that makes it null by default, making the parser ignore DTDs by default.
                  * However, in all previous versions, these parsers are unsafe by default.
@@ -481,7 +481,7 @@ namespace DotNetUnitTests
                     }
                 #endregion
 
-                #region XmlReader: Unsafe when Turning on DTDs Manually Example
+                #region XmlReader: Unsafe when Resolving Entities Manually Example
                 /**
                  * By giving the XmlReader a XmlReaderSettings object that has DtdProcessing set to Parse, the XmlReader will parse entities.
                  * In .NET versions 4.5.2 and up, however, it is still safe because the XmlReaderSettings has a null XmlResolver object.
@@ -532,7 +532,7 @@ namespace DotNetUnitTests
                     }
                 #endregion
 
-                #region XmlTextReader: Safe by Default in .NET Version 4.5.2 and above / Unsafe by Default in .NET Version 4.5.1 and lower Example
+                #region XmlTextReader: Safe by Default in Current .NET Version (4.5.2 and above) Example / XmlTextReader: Unsafe by Default in Current .NET Version (4.5.1 and lower) Example
                 /**
                  * In .NET version 4.5.2, Microsoft made a change to parsers that implement an XmlResolver object that makes it null by default, making the parser ignore DTDs by default.
                  * However, in all previous versions, these parsers are unsafe by default.
@@ -668,7 +668,7 @@ namespace DotNetUnitTests
                     }
                 #endregion
 
-                #region XPathNavigator: Safe by Default in .NET Version 4.5.2 and above / Unsafe by Default in .NET Version 4.5.1 and lower Example
+                #region XPathNavigator: Safe by Default in Current .NET Version (4.5.2 and above) Example / XPathNavigator: Unsafe by Default in Current .NET Version (4.5.1 and lower) Example
                 /**
                  * XPathNavigator is safe in .NET versions 4.5.2 and up, and unsafe in versions 4.5.1 and under, because it implements IXPathNavigable objects (such as XmlDocument).
                  * This causes XPathNavigator to be just as safe as they are: parsing entities in any version before 4.5.2 only.

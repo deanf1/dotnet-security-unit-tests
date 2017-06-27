@@ -8,6 +8,8 @@
 </head>
 <body>
     <h1><%= Request.QueryString["test"] %></h1>
+    <a href="codeview.aspx?type=xml&test=<%= Request.QueryString["test"] %>">View code for this test</a>
+    <br /><br />
     <h3>Enter an XML file containing an entity:</h3>
     <textarea rows="15" cols="150" name="payload" form="theform"><%
                                                                      string path = Request.PhysicalApplicationPath;
