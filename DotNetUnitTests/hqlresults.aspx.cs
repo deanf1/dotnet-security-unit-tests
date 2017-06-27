@@ -96,6 +96,60 @@ namespace DotNetUnitTests
                     }
                 #endregion
 
+                #region SELECT: Unsafe when Using String Placeholders on Custom HQL Queries (CreateQuery) Example
+                /**
+                 * By using string placeholders in the CreateQuery method, the HQL query is just as vulnerable to injection as any unsafe SQL query.
+                 */
+                case "unsafehqlstringplace":
+                    {
+                        bool expectedSafe = false;
+
+                        // creating the database session
+                        ISessionFactory sessionFactory = new Configuration().Configure().BuildSessionFactory();
+                        ISession session = sessionFactory.OpenSession();
+
+                        // creating and receiving the results of the custom HQL query
+                        IQuery query = session.CreateQuery(String.Format("FROM Student WHERE FirstName = '{0}';", hqltext));    // unsafe!
+                        IList<Student> students = query.List<Student>();
+
+                        // testing the result
+                        TestResults(students, hqltext, expectedSafe);
+
+                        session.Close();
+                        sessionFactory.Close();
+
+                        break;
+                    }
+                #endregion
+
+                #region SELECT: Unsafe when Using String Placeholders on Custom SQL Queries (CreateSQLQuery) Example
+                /**
+                 * By using string placeholders in the CreateSQLQuery method, the SQL query is vulnerable to injection.
+                 */
+                case "unsafesqlstringplace":
+                    {
+                        bool expectedSafe = false;
+
+                        // creating the database session
+                        ISessionFactory sessionFactory = new Configuration().Configure().BuildSessionFactory();
+                        ISession session = sessionFactory.OpenSession();
+
+                        // creating and receiving the results of the custom SQL query
+                        ISQLQuery query = session.CreateSQLQuery(String.Format("SELECT * FROM Student WHERE FirstName = '{0}';", hqltext));    // unsafe!
+                        query.AddEntity(typeof(Student));
+
+                        IList<Student> students = query.List<Student>();
+
+                        // testing the result
+                        TestResults(students, hqltext, expectedSafe);
+
+                        session.Close();
+                        sessionFactory.Close();
+
+                        break;
+                    }
+                #endregion
+
                 #region SELECT: Safe when Parameterizing Custom HQL Queries (CreateQuery) Example
                 /**
                  * By parameterizing the user input, we can succesfully block any HQL injection attempts.
@@ -210,6 +264,42 @@ namespace DotNetUnitTests
 
                         // delete the inputted user
                         session.Delete("FROM Student WHERE FirstName = '" + hqltext + "';");
+                        session.Flush();
+
+                        // getting the User students to see what the results of the DELETE were
+                        IQuery query = session.CreateQuery("FROM Student WHERE FirstName = 'Test' OR FirstName = 'Target';");
+                        IList<Student> students = query.List<Student>();
+
+                        // testing the result
+                        TestResults(students, hqltext, expectedSafe);
+
+                        session.Close();
+                        sessionFactory.Close();
+
+                        break;
+                    }
+                #endregion
+
+                #region DELETE: Unsafe when Using String Placeholders on Custom HQL Queries Example
+                /**
+                 * By using string placeholders in the Delete method, the query is vulnerable to injection.
+                 */
+                case "deleteunsafestringplace":
+                    {
+                        bool expectedSafe = false;
+
+                        // creating the database session
+                        ISessionFactory sessionFactory = new Configuration().Configure().BuildSessionFactory();
+                        ISession session = sessionFactory.OpenSession();
+
+                        // inserting the User students that will (hopefully) be deleted
+                        Student test = new Student("User", "Test", "test", "deleteme");
+                        Student target = new Student("User", "Target", "target", "deleteme2");
+                        session.Save(test);
+                        session.Save(target);
+
+                        // delete the inputted user
+                        session.Delete(String.Format("FROM Student WHERE FirstName = '{0}';", hqltext));
                         session.Flush();
 
                         // getting the User students to see what the results of the DELETE were
