@@ -208,7 +208,7 @@ namespace DotNetUnitTests
 
                 #region DELETE: Safe when Using Built-in Functions Example [TEST REMOVED]
                 /**
-                 * By parameterizing the user input, we can succesfully block any SQL injection attempts.
+                 * By using NHibernate's built-in functions that aim to make executing querys more object-oriented, the input query is inherently parameterized.
                  * NOTE: TEST REMOVED: Delete(object obj) only works when first fetching existing objects from the table.
                  *                     I chose not to do this as the saftey would fall back to that SELECT query, making this test irrelevant for DELETE.
                  *                     You can not delete a copy of the object, it has to be the same one.
@@ -216,6 +216,7 @@ namespace DotNetUnitTests
                  */
                 case "deletesafedefault":
                     {
+                        /**
                         //bool expectedSafe = true;
 
                         // creating the database session
@@ -239,6 +240,7 @@ namespace DotNetUnitTests
 
                         session.Close();
                         sessionFactory.Close();
+                        */
 
                         break;
                     }
