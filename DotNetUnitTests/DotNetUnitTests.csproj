@@ -88,7 +88,7 @@
     <Content Include="hqlresults.aspx" />
     <Content Include="nhibernate.aspx" />
     <Content Include="resources\test.xsl" />
-    <Content Include="resources\xxe.txt" />
+    <Content Include="resources\xxe_attack.txt" />
     <Content Include="resources\xxetest.xml">
       <SubType>Designer</SubType>
     </Content>
