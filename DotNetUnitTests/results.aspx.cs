@@ -819,9 +819,8 @@ namespace DotNetUnitTests
                     }
                 #endregion
 
-                // default case
                 default:
-                    Response.Write("Error: Test case not found");
+                    Response.Write("Error: Test case not found for \"" + Request.QueryString["var"] + "\"");
                     break;
             }
         }
