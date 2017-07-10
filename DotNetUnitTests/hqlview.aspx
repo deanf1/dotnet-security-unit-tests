@@ -24,7 +24,7 @@
         {
             Response.Write("<h3>The Student table has the following rows: ID, LastName, FirstName, Username, and Password.</h3>");
             Response.Write("<h3>This form performs a HQL query that selects the row with the first name entered below.</h3>");
-            Response.Write("<h3>The injection given below will attempt to fetch all table rows instead of the just entered one by adding <mark>' OR 'a'='a</mark> to the end.</h3>");
+            Response.Write("<h3>The injection given below will attempt to fetch all table rows instead of just the entered one by adding <mark>' OR 'a'='a</mark> to the end.</h3>");
         }
 
         %>
