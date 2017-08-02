@@ -14,6 +14,10 @@
             code = System.IO.File.ReadAllLines(appPath + "results.aspx.cs");
         else if (Request.QueryString["type"].Equals("hql"))
             code = System.IO.File.ReadAllLines(appPath + "hqlresults.aspx.cs");
+        else if (Request.QueryString["type"].Equals("xpath"))
+            code = System.IO.File.ReadAllLines(appPath + "xpathresults.aspx.cs");
+        else if (Request.QueryString["type"].Equals("xquery"))
+            code = System.IO.File.ReadAllLines(appPath + "xqueryresults.aspx.cs");
 
         Response.Write("<pre>");
         bool printFlag = false;

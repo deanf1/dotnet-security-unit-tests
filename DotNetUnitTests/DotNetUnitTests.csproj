@@ -50,10 +50,22 @@
       <HintPath>..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="IKVM.OpenJDK.Core, Version=7.2.4630.5, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Saxonica\SaxonPE9.8N\bin\IKVM.OpenJDK.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.XML.API, Version=7.2.4630.5, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Saxonica\SaxonPE9.8N\bin\IKVM.OpenJDK.XML.API.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="NHibernate, Version=4.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <HintPath>..\packages\NHibernate.4.1.1.4000\lib\net40\NHibernate.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="saxon9pe, Version=9.8.0.3, Culture=neutral, PublicKeyToken=e1fdd002d5083fe6, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Saxonica\SaxonPE9.8N\bin\saxon9pe.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Runtime.Serialization" />
@@ -85,7 +97,14 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="xqueryview.aspx" />
+    <Content Include="xqueryresults.aspx" />
+    <Content Include="xpathresults.aspx" />
     <Content Include="hqlresults.aspx" />
+    <Content Include="resources\students.xml" />
+    <Content Include="xpathview.aspx" />
+    <Content Include="xquery.aspx" />
+    <Content Include="xpath.aspx" />
     <Content Include="nhibernate.aspx" />
     <Content Include="resources\test.xsl" />
     <Content Include="resources\xxe_attack.txt" />
@@ -114,6 +133,26 @@
     <Compile Include="codeview.aspx.designer.cs">
       <DependentUpon>codeview.aspx</DependentUpon>
     </Compile>
+    <Compile Include="xqueryview.aspx.cs">
+      <DependentUpon>xqueryview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="xqueryview.aspx.designer.cs">
+      <DependentUpon>xqueryview.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="xqueryresults.aspx.cs">
+      <DependentUpon>xqueryresults.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="xqueryresults.aspx.designer.cs">
+      <DependentUpon>xqueryresults.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="xpathresults.aspx.cs">
+      <DependentUpon>xpathresults.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="xpathresults.aspx.designer.cs">
+      <DependentUpon>xpathresults.aspx</DependentUpon>
+    </Compile>
     <Compile Include="hqlresults.aspx.cs">
       <DependentUpon>hqlresults.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -127,6 +166,27 @@
     </Compile>
     <Compile Include="index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="xpathview.aspx.cs">
+      <DependentUpon>xpathview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="xpathview.aspx.designer.cs">
+      <DependentUpon>xpathview.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="xquery.aspx.cs">
+      <DependentUpon>xquery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="xquery.aspx.designer.cs">
+      <DependentUpon>xquery.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="xpath.aspx.cs">
+      <DependentUpon>xpath.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="xpath.aspx.designer.cs">
+      <DependentUpon>xpath.aspx</DependentUpon>
     </Compile>
     <Compile Include="nhibernate.aspx.cs">
       <DependentUpon>nhibernate.aspx</DependentUpon>

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0"?>
+<Students>
+    <Student studentId="1">
+        <LastName>Tables</LastName>
+        <FirstName>Bobby</FirstName>
+        <Username>btables</Username>
+        <Password>Tr0ub4dor&amp;3</Password>
+    </Student>
+    <Student studentId="2">
+        <LastName>Tables</LastName>
+        <FirstName>Bobby&apos; or &apos;a&apos;=&apos;a</FirstName>
+        <Username>btables2</Username>
+        <Password>correcthorsebatterystaple</Password>
+    </Student>
+    <Student>
+        <LastName>Tables</LastName>
+        <FirstName>Bobby&quot; or &quot;a&quot;=&quot;a</FirstName>
+        <Username>btables3</Username>
+        <Password>correcthorsebatterystaple</Password>
+    </Student>
+    <Student studentId="3">
+        <LastName>Skywalker</LastName>
+        <FirstName>Anakin</FirstName>
+        <Username>sithlord</Username>
+        <Password>ihatesand1234</Password>
+    </Student>
+</Students>

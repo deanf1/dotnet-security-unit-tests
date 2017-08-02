@@ -10,7 +10,7 @@
 <body>
 
 <h1>NHibernate Injection Vulnerability Tests</h1>
-<a href="index.aspx">.NET XXE Injection Tests</a> | <a href="nhibernate.aspx">NHibernate Injection Tests</a>
+<a href="index.aspx">.NET XXE Injection Tests</a> | <a href="nhibernate.aspx">NHibernate Injection Tests</a> | <a href="xpath.aspx">XPath Injection Tests</a> | <a href="xquery.aspx">XQuery Injection Tests</a>
 <%  Response.Write("<h3>");
     Response.Write("Current .NET Framework Version: " + HttpRuntime.TargetFramework.ToString());
     Response.Write("<br />" + "Unsafe Tests: 6" + "<br />" + "Safe Tests: 4");
