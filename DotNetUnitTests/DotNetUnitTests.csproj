@@ -52,11 +52,11 @@
     </Reference>
     <Reference Include="IKVM.OpenJDK.Core, Version=7.2.4630.5, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files\Saxonica\SaxonPE9.8N\bin\IKVM.OpenJDK.Core.dll</HintPath>
+      <HintPath>..\packages\SaxonPE9.8N\IKVM.OpenJDK.Core.dll</HintPath>
     </Reference>
     <Reference Include="IKVM.OpenJDK.XML.API, Version=7.2.4630.5, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files\Saxonica\SaxonPE9.8N\bin\IKVM.OpenJDK.XML.API.dll</HintPath>
+      <HintPath>..\packages\SaxonPE9.8N\IKVM.OpenJDK.XML.API.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="NHibernate, Version=4.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
@@ -65,7 +65,7 @@
     </Reference>
     <Reference Include="saxon9pe, Version=9.8.0.3, Culture=neutral, PublicKeyToken=e1fdd002d5083fe6, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files\Saxonica\SaxonPE9.8N\bin\saxon9pe.dll</HintPath>
+      <HintPath>..\packages\SaxonPE9.8N\saxon9pe.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Runtime.Serialization" />
