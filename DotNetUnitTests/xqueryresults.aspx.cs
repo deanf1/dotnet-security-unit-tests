@@ -133,9 +133,8 @@ namespace DotNetUnitTests
                             XQueryCompiler xqComp = processor.newXQueryCompiler();
                             XQueryExecutable xqExec = xqComp.compile(query);
                             XQueryEvaluator xqEval = xqExec.load();
-                            xqEval.setExternalVariable(new QName("name"), new XdmAtomicValue(Request.QueryString["payload"]));
                             xqEval.setContextItem(node);
-                            
+                            xqEval.setExternalVariable(new QName("name"), new XdmAtomicValue(Request.QueryString["payload"]));
                             xqEval.evaluate();
 
                             // interpret the result of the query
