@@ -13,9 +13,9 @@ namespace DotNetUnitTests
     {
 
         /**
-         *  Detects which test case we're running, runs it, and prints the results
+         * Detects which test case we're running, runs it, and prints the results
          */
-        private void PerformTest(string xmltext)
+        private void PerformTest(string xmlText)
         {
             string appPath = Request.PhysicalApplicationPath;
 
@@ -30,7 +30,8 @@ namespace DotNetUnitTests
                     {
                         bool expectedSafe = true;
 
-                        XElement xelement = XElement.Load(appPath + "resources/xxetestuser.xml");
+                        XElement xelement = XElement.Load(new MemoryStream(Encoding.ASCII.GetBytes(xmlText)));
+                        //XElement xelement = XElement.Load(appPath + "resources/xxetestuser.xml");
 
                         try
                         {
@@ -65,7 +66,8 @@ namespace DotNetUnitTests
                     {
                         bool expectedSafe = true;
 
-                        XDocument xdocument = XDocument.Load(appPath + "resources/xxetestuser.xml");
+                        XDocument xdocument = XDocument.Load(new MemoryStream(Encoding.ASCII.GetBytes(xmlText)));
+                        //XDocument xdocument = XDocument.Load(appPath + "resources/xxetestuser.xml");
 
                         try
                         {
@@ -109,7 +111,8 @@ namespace DotNetUnitTests
                             //res.ResolveUri(new Uri(Environment.CurrentDirectory), "resources/xxetestuser.xml"); // works but not needed
                             settings.XmlResolver = res;
                         }
-                        XmlReader reader = XmlReader.Create(appPath + "resources/xxetestuser.xml", settings);
+                        XmlReader reader = XmlReader.Create(new MemoryStream(Encoding.ASCII.GetBytes(xmlText)), settings, appPath + "resources/");
+                        //XmlReader reader = XmlReader.Create(appPath + "resources/xxetestuser.xml", settings);
                         XDocument xdocument = XDocument.Load(reader);    // unsafe!
 
                         try
@@ -148,7 +151,8 @@ namespace DotNetUnitTests
                     {
                         bool expectedSafe = true;
 
-                        XmlDictionaryReader dict = XmlDictionaryReader.CreateTextReader(Encoding.ASCII.GetBytes(xmltext), XmlDictionaryReaderQuotas.Max);
+                        xmlText = FixXMLBaseURI(xmlText, appPath);  // makes sure that the external entity gets referenced at the correct base URI
+                        XmlDictionaryReader dict = XmlDictionaryReader.CreateTextReader(Encoding.ASCII.GetBytes(xmlText), XmlDictionaryReaderQuotas.Max);
 
                         try
                         {
@@ -197,7 +201,7 @@ namespace DotNetUnitTests
                             settings.XmlResolver = res;
                         }
 
-                        XmlReader reader = XmlReader.Create(appPath + "resources/xxetestuser.xml", settings);
+                        XmlReader reader = XmlReader.Create(new MemoryStream(Encoding.ASCII.GetBytes(xmlText)), settings, appPath + "resources/");
                         XmlDictionaryReader dict = XmlDictionaryReader.CreateDictionaryReader(reader);
                             
                         try
@@ -243,8 +247,9 @@ namespace DotNetUnitTests
                         try
                         {
                             // parsing the XML   
-                            XmlDocument doc = new XmlDocument();    
-                            doc.Load(appPath + "resources/xxetestuser.xml");    // unsafe! (safe in .NET versions 4.5.2+)
+                            XmlDocument doc = new XmlDocument();
+                            xmlText = FixXMLBaseURI(xmlText, appPath);  // makes sure that the external entity gets referenced at the correct base URI    
+                            doc.LoadXml(xmlText);    // unsafe! (safe in .NET versions 4.5.2+)
                             string innerText = doc.InnerText;
 
                             // testing the result
@@ -275,7 +280,8 @@ namespace DotNetUnitTests
                             // parsing the XML  
                             XmlDocument doc = new XmlDocument();
                             doc.XmlResolver = null; // safety measure
-                            doc.Load(appPath + "resources/xxetestuser.xml");
+                            xmlText = FixXMLBaseURI(xmlText, appPath);  // makes sure that the external entity gets referenced at the correct base URI
+                            doc.LoadXml(xmlText);
                             string innerText = doc.InnerText;
 
                             // testing the result
@@ -313,7 +319,8 @@ namespace DotNetUnitTests
                                 //res.ResolveUri(new Uri(Environment.CurrentDirectory), "resources/xxetestuser.xml"); // works but not needed
                                 doc.XmlResolver = res;
                             }
-                            doc.Load(appPath + "resources/xxetestuser.xml");
+                            xmlText = FixXMLBaseURI(xmlText, appPath);  // makes sure that the external entity gets referenced at the correct base URI
+                            doc.LoadXml(xmlText);
                             string innerText = doc.InnerText;
 
                             // testing the result
@@ -348,7 +355,8 @@ namespace DotNetUnitTests
                             //res.ResolveUri(new Uri(Environment.CurrentDirectory), "resources/xxetestuser.xml"); // works but not needed
                             doc.XmlResolver = res;
                         }
-                        doc.Load(appPath + "resources/xxetestuser.xml"); // unsafe! (safe in .NET versions 4.5.2+)
+                        xmlText = FixXMLBaseURI(xmlText, appPath);  // makes sure that the external entity gets referenced at the correct base URI
+                        doc.LoadXml(xmlText); // unsafe! (safe in .NET versions 4.5.2+)
 
                         XmlNodeReader reader = new XmlNodeReader(doc);  // safe even though the XmlDocument is not!
 
@@ -397,7 +405,8 @@ namespace DotNetUnitTests
                             //res.ResolveUri(new Uri(Environment.CurrentDirectory), "resources/xxetestuser.xml"); // works but not needed
                             doc.XmlResolver = res;
                         }
-                        doc.Load(appPath + "resources/xxetestuser.xml"); // unsafe! (safe in .NET versions 4.5.2+)
+                        xmlText = FixXMLBaseURI(xmlText, appPath);  // makes sure that the external entity gets referenced at the correct base URI
+                        doc.LoadXml(xmlText); // unsafe! (safe in .NET versions 4.5.2+)
 
                         XmlNodeReader reader = new XmlNodeReader(doc);  // safe even though the XmlDocument is not!
 
@@ -451,7 +460,8 @@ namespace DotNetUnitTests
                     {
                         bool expectedSafe = true;
 
-                        XmlReader reader = XmlReader.Create(appPath + "resources/xxetestuser.xml");
+                        XmlReader reader = XmlReader.Create(new MemoryStream(Encoding.ASCII.GetBytes(xmlText)), new XmlReaderSettings(), appPath + "resources/");
+                        //XmlReader reader = XmlReader.Create(appPath + "resources/xxetestuser.xml");
 
                         try
                         {
@@ -502,7 +512,8 @@ namespace DotNetUnitTests
                             //res.ResolveUri(new Uri(Environment.CurrentDirectory), "resources/xxetestuser.xml"); // works but not needed
                             settings.XmlResolver = res;
                         }
-                        XmlReader reader = XmlReader.Create(appPath + "resources/xxetestuser.xml", settings);
+                        XmlReader reader = XmlReader.Create(new MemoryStream(Encoding.ASCII.GetBytes(xmlText)), settings, appPath + "resources/");
+                        //XmlReader reader = XmlReader.Create(appPath + "resources/xxetestuser.xml", settings);
 
                         try
                         {
@@ -543,7 +554,8 @@ namespace DotNetUnitTests
                         if (HttpRuntime.TargetFramework.Minor >= 6 || HttpRuntime.TargetFramework.ToString().Equals("4.5.2"))
                             expectedSafe = true;
 
-                        XmlTextReader reader = new XmlTextReader(appPath + "resources/xxetestuser.xml");    // unsafe! (safe in .NET version 4.5.2+)
+                        XmlTextReader reader = new XmlTextReader(appPath + "resources/", new MemoryStream(Encoding.ASCII.GetBytes(xmlText)));   // unsafe! (safe in .NET version 4.5.2+)
+                        //XmlTextReader reader = new XmlTextReader(appPath + "resources/xxetestuser.xml");    // unsafe! (safe in .NET version 4.5.2+)
 
                         try {
                             // parsing the XML
@@ -584,7 +596,8 @@ namespace DotNetUnitTests
                     {
                         bool expectedSafe = true;
 
-                        XmlTextReader reader = new XmlTextReader(appPath + "resources/xxetestuser.xml");
+                        XmlTextReader reader = new XmlTextReader(appPath + "resources/", new MemoryStream(Encoding.ASCII.GetBytes(xmlText)));   // unsafe! (safe in .NET version 4.5.2+)
+                        //XmlTextReader reader = new XmlTextReader(appPath + "resources/xxetestuser.xml");
 
                         try
                         {      
@@ -626,7 +639,8 @@ namespace DotNetUnitTests
                     {
                         bool expectedSafe = false;
 
-                        XmlTextReader reader = new XmlTextReader(appPath + "resources/xxetestuser.xml");    // unsafe! (safe in .NET versions 4.5.2+)
+                        XmlTextReader reader = new XmlTextReader(appPath + "resources/", new MemoryStream(Encoding.ASCII.GetBytes(xmlText)));   // unsafe! (safe in .NET version 4.5.2+)
+                        //XmlTextReader reader = new XmlTextReader(appPath + "resources/xxetestuser.xml");    // unsafe! (safe in .NET versions 4.5.2+)
 
                         // forcing unsafe in .NET versions 4.5.2+
                         if (HttpRuntime.TargetFramework.Minor >= 6 || HttpRuntime.TargetFramework.ToString().Equals("4.5.2"))
@@ -680,7 +694,10 @@ namespace DotNetUnitTests
                         if (HttpRuntime.TargetFramework.Minor >= 6 || HttpRuntime.TargetFramework.ToString().Equals("4.5.2"))
                             expectedSafe = true;
 
-                        XPathDocument doc = new XPathDocument(appPath + "resources/xxetestuser.xml");
+                        xmlText = FixXMLBaseURI(xmlText, appPath);  // makes sure that the external entity gets referenced at the correct base URI
+
+                        XPathDocument doc = new XPathDocument(new MemoryStream(Encoding.ASCII.GetBytes(xmlText)));
+                        //XPathDocument doc = new XPathDocument(appPath + "resources/xxetestuser.xml");
                         XPathNavigator nav = doc.CreateNavigator(); // unsafe!
 
                         try
@@ -712,7 +729,7 @@ namespace DotNetUnitTests
                     {
                         bool expectedSafe = true;
 
-                        XmlReader reader = XmlReader.Create(appPath + "resources/xxetestuser.xml");   
+                        XmlReader reader = XmlReader.Create(new MemoryStream(Encoding.ASCII.GetBytes(xmlText)), new XmlReaderSettings(), appPath + "resources/");
 
                         try
                         {
@@ -756,7 +773,8 @@ namespace DotNetUnitTests
                             XslCompiledTransform transformer = new XslCompiledTransform();
                             transformer.Load(appPath + "resources/test.xsl");
                             StringWriter output = new StringWriter();
-                            transformer.Transform(appPath + "resources/xxetestuser.xml", new XsltArgumentList(), output);
+                            transformer.Transform(XmlReader.Create(new MemoryStream(Encoding.ASCII.GetBytes(xmlText)), new XmlReaderSettings(), appPath + "resources/"), new XsltArgumentList(), output);
+                            //transformer.Transform(appPath + "resources/xxetestuser.xml", new XsltArgumentList(), output);
 
                             // testing the result
                             if (output.ToString().Contains("SUCCESSFUL"))
@@ -781,7 +799,7 @@ namespace DotNetUnitTests
                     {
                         bool expectedSafe = false;
 
-                        XmlTextReader reader = new XmlTextReader(appPath + "resources/xxetestuser.xml");    // unsafe! (safe in .NET version 4.5.2+)
+                        XmlTextReader reader = new XmlTextReader(appPath + "resources/", new MemoryStream(Encoding.ASCII.GetBytes(xmlText)));   // unsafe! (safe in .NET version 4.5.2+)
 
                         // forcing unsafe in .NET versions 4.5.2+
                         if (HttpRuntime.TargetFramework.Minor >= 6 || HttpRuntime.TargetFramework.ToString().Equals("4.5.2"))
@@ -826,7 +844,7 @@ namespace DotNetUnitTests
         }
 
         /**
-         *  Prints the results
+         * Prints the results
          */
         private void PrintResults(bool expectedSafe, bool actuallySafe, string xmlContent)
         {
@@ -846,7 +864,7 @@ namespace DotNetUnitTests
         }
 
         /**
-         *  Prints the results if there is an exception
+         * Prints the results if there is an exception
          */
         private void PrintResults(bool expectedSafe, bool actuallySafe, Exception ex)
         {
@@ -855,22 +873,32 @@ namespace DotNetUnitTests
         }
 
         /**
+         * Makes sure that the base URI of the external entity file is correct so that it is referenced correctly
+         */
+        private string FixXMLBaseURI(string xmlText, string appPath)
+        {
+            int index = xmlText.IndexOf("SYSTEM \"") + "SYSTEM \"".Length;
+            xmlText = xmlText.Insert(index, appPath + "resources/");
+            return xmlText;
+        }
+
+        /**
          * Starts the tests on page load
          */
         protected void Page_Load(object sender, EventArgs e) 
         {
             // gets the user's input
-            string xmltext = Request.QueryString["payload"];
+            string xmlText = Request.QueryString["payload"];
 
             // writes user's input to a file
-            string appPath = Request.PhysicalApplicationPath;
+            /*string appPath = Request.PhysicalApplicationPath;
             using (StreamWriter file = new StreamWriter(appPath + "/resources/xxetestuser.xml", false))
             {
-                file.Write(xmltext);
+                file.Write(xmlText);
                 file.Close();
-            }   
+            }   */
             
-            PerformTest(xmltext);
+            PerformTest(xmlText);
         }
     }
 }
