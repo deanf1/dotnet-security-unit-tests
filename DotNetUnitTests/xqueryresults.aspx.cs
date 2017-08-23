@@ -14,7 +14,7 @@ namespace DotNetUnitTests
         /**
          *  Detects which test case we're running, runs it, and prints the results
          */
-        private void PerformTest(string hqltext)
+        private void PerformTest(string xQueryText)
         {
             string appPath = Request.PhysicalApplicationPath;
 
@@ -291,9 +291,9 @@ namespace DotNetUnitTests
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            string hqltext = Request.QueryString["payload"];
+            string xQueryText = Request.QueryString["payload"];
 
-            PerformTest(hqltext);
+            PerformTest(xQueryText);
         }
     }
 }

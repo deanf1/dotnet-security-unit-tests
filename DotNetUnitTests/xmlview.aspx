@@ -13,8 +13,8 @@
     <h3>Enter an XML file containing an entity:</h3>
     <textarea rows="15" cols="150" name="payload" form="theform"><%
                                                                      string path = Request.PhysicalApplicationPath;
-                                                                     string xmltext = System.IO.File.ReadAllText(path + "/resources/xxetest.xml");                                                                 
-                                                                     Response.Write(xmltext);
+                                                                     string xmlText = System.IO.File.ReadAllText(path + "/resources/xxetest.xml");                                                                 
+                                                                     Response.Write(xmlText);
     %></textarea>
     <form id="theform" action="results.aspx" method="get" autocomplete="off" runat="server">
         <input type="hidden" name="var" value="<%= Request.QueryString["var"] %>" />

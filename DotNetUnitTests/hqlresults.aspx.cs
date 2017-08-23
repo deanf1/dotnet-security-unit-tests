@@ -10,7 +10,7 @@ namespace DotNetUnitTests
         /**
          *  Detects which test case we're running, runs it, and prints the results
          */
-        private void PerformTest(string hqltext)
+        private void PerformTest(string hqlText)
         {
 
             switch (Request.QueryString["var"])
@@ -29,11 +29,11 @@ namespace DotNetUnitTests
 
                         // creating and receiving the results of the HQL query
                         ICriteria criteria = session.CreateCriteria<Student>();
-                        criteria.Add(NHibernate.Criterion.Expression.Eq("FirstName", hqltext));   // safe!
+                        criteria.Add(NHibernate.Criterion.Expression.Eq("FirstName", hqlText));   // safe!
                         IList<Student> students = criteria.List<Student>();
 
                         // testing the result
-                        TestResults(students, hqltext, expectedSafe);
+                        TestResults(students, hqlText, expectedSafe);
 
                         session.Close();
                         sessionFactory.Close();
@@ -55,11 +55,11 @@ namespace DotNetUnitTests
                         ISession session = sessionFactory.OpenSession();
 
                         // creating and receiving the results of the custom HQL query
-                        IQuery query = session.CreateQuery("FROM Student WHERE FirstName = '" + hqltext + "';");    // unsafe!
+                        IQuery query = session.CreateQuery("FROM Student WHERE FirstName = '" + hqlText + "';");    // unsafe!
                         IList<Student> students = query.List<Student>();
 
                         // testing the result
-                        TestResults(students, hqltext, expectedSafe);
+                        TestResults(students, hqlText, expectedSafe);
 
                         session.Close();
                         sessionFactory.Close();
@@ -81,13 +81,13 @@ namespace DotNetUnitTests
                         ISession session = sessionFactory.OpenSession();
 
                         // creating and receiving the results of the custom SQL query
-                        ISQLQuery query = session.CreateSQLQuery("SELECT * FROM Student WHERE FirstName = '" + hqltext + "';");    // unsafe!
+                        ISQLQuery query = session.CreateSQLQuery("SELECT * FROM Student WHERE FirstName = '" + hqlText + "';");    // unsafe!
                         query.AddEntity(typeof(Student));
 
                         IList<Student> students = query.List<Student>();
 
                         // testing the result
-                        TestResults(students, hqltext, expectedSafe);
+                        TestResults(students, hqlText, expectedSafe);
 
                         session.Close();
                         sessionFactory.Close();
@@ -109,11 +109,11 @@ namespace DotNetUnitTests
                         ISession session = sessionFactory.OpenSession();
 
                         // creating and receiving the results of the custom HQL query
-                        IQuery query = session.CreateQuery(String.Format("FROM Student WHERE FirstName = '{0}';", hqltext));    // unsafe!
+                        IQuery query = session.CreateQuery(String.Format("FROM Student WHERE FirstName = '{0}';", hqlText));    // unsafe!
                         IList<Student> students = query.List<Student>();
 
                         // testing the result
-                        TestResults(students, hqltext, expectedSafe);
+                        TestResults(students, hqlText, expectedSafe);
 
                         session.Close();
                         sessionFactory.Close();
@@ -135,13 +135,13 @@ namespace DotNetUnitTests
                         ISession session = sessionFactory.OpenSession();
 
                         // creating and receiving the results of the custom SQL query
-                        ISQLQuery query = session.CreateSQLQuery(String.Format("SELECT * FROM Student WHERE FirstName = '{0}';", hqltext));    // unsafe!
+                        ISQLQuery query = session.CreateSQLQuery(String.Format("SELECT * FROM Student WHERE FirstName = '{0}';", hqlText));    // unsafe!
                         query.AddEntity(typeof(Student));
 
                         IList<Student> students = query.List<Student>();
 
                         // testing the result
-                        TestResults(students, hqltext, expectedSafe);
+                        TestResults(students, hqlText, expectedSafe);
 
                         session.Close();
                         sessionFactory.Close();
@@ -164,11 +164,11 @@ namespace DotNetUnitTests
 
                         // creating and receiving the results of the custom HQL query
                         IQuery query = session.CreateQuery("FROM Student WHERE FirstName = :name");
-                        query.SetParameter("name", hqltext);    // safe!
+                        query.SetParameter("name", hqlText);    // safe!
                         IList<Student> students = query.List<Student>();
 
                         // testing the result
-                        TestResults(students, hqltext, expectedSafe);
+                        TestResults(students, hqlText, expectedSafe);
 
                         session.Close();
                         sessionFactory.Close();
@@ -192,12 +192,12 @@ namespace DotNetUnitTests
                         // creating and receiving the results of the custom SQL query
                         ISQLQuery query = session.CreateSQLQuery("SELECT * FROM Student WHERE FirstName = :name");
                         query.AddEntity(typeof(Student));
-                        query.SetParameter("name", hqltext);    // safe!
+                        query.SetParameter("name", hqlText);    // safe!
 
                         IList<Student> students = query.List<Student>();
 
                         // testing the result
-                        TestResults(students, hqltext, expectedSafe);
+                        TestResults(students, hqlText, expectedSafe);
 
                         session.Close();
                         sessionFactory.Close();
@@ -231,12 +231,12 @@ namespace DotNetUnitTests
 
                         // delete the inputted user (doesn't work)
                         Student input = new Student();
-                        input.FirstName = hqltext;
+                        input.FirstName = hqlText;
                         session.Delete(input);
                         session.Flush();
 
                         // testing the result
-                        //TestResults(students, hqltext, expectedSafe);
+                        //TestResults(students, hqlText, expectedSafe);
 
                         session.Close();
                         sessionFactory.Close();
@@ -265,7 +265,7 @@ namespace DotNetUnitTests
                         session.Save(target);
 
                         // delete the inputted user
-                        session.Delete("FROM Student WHERE FirstName = '" + hqltext + "';");
+                        session.Delete("FROM Student WHERE FirstName = '" + hqlText + "';");
                         session.Flush();
 
                         // getting the User students to see what the results of the DELETE were
@@ -273,7 +273,7 @@ namespace DotNetUnitTests
                         IList<Student> students = query.List<Student>();
 
                         // testing the result
-                        TestResults(students, hqltext, expectedSafe);
+                        TestResults(students, hqlText, expectedSafe);
 
                         session.Close();
                         sessionFactory.Close();
@@ -301,7 +301,7 @@ namespace DotNetUnitTests
                         session.Save(target);
 
                         // delete the inputted user
-                        session.Delete(String.Format("FROM Student WHERE FirstName = '{0}';", hqltext));
+                        session.Delete(String.Format("FROM Student WHERE FirstName = '{0}';", hqlText));
                         session.Flush();
 
                         // getting the User students to see what the results of the DELETE were
@@ -309,7 +309,7 @@ namespace DotNetUnitTests
                         IList<Student> students = query.List<Student>();
 
                         // testing the result
-                        TestResults(students, hqltext, expectedSafe);
+                        TestResults(students, hqlText, expectedSafe);
 
                         session.Close();
                         sessionFactory.Close();
@@ -339,7 +339,7 @@ namespace DotNetUnitTests
 
                         // delete the inputted user
                         IQuery query = session.CreateQuery("DELETE FROM Student WHERE FirstName = :name");
-                        query.SetParameter("name", hqltext);    // safe!
+                        query.SetParameter("name", hqlText);    // safe!
                         query.ExecuteUpdate();
 
                         // getting the User students to see what the results of the DELETE were
@@ -347,7 +347,7 @@ namespace DotNetUnitTests
                         IList<Student> students = postQuery.List<Student>();
 
                         // testing the result
-                        TestResults(students, hqltext, expectedSafe);
+                        TestResults(students, hqlText, expectedSafe);
 
                         session.Close();
                         sessionFactory.Close();
@@ -366,10 +366,10 @@ namespace DotNetUnitTests
         /**
          *  Tests the result of the query and changes the print type accordingly
          */
-        private void TestResults(IList<Student> students, string hqltext, bool expectedSafe)
+        private void TestResults(IList<Student> students, string hqlText, bool expectedSafe)
         {
             // using the default injection
-            if (hqltext.Equals("Bobby' OR 'a'='a") || hqltext.Equals("Test' OR FirstName='Target"))
+            if (hqlText.Equals("Bobby' OR 'a'='a") || hqlText.Equals("Test' OR FirstName='Target"))
             {
                 if (expectedSafe)
                     PrintResults(expectedSafe, true, false, students);
@@ -378,7 +378,7 @@ namespace DotNetUnitTests
             }
 
             // using a custom injection that uses a semicolon or apostrophe
-            else if (hqltext.Contains(";") || hqltext.Contains("'"))
+            else if (hqlText.Contains(";") || hqlText.Contains("'"))
                 PrintResults(expectedSafe, false, true, students);
 
             else
@@ -440,9 +440,9 @@ namespace DotNetUnitTests
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            string hqltext = Request.QueryString["payload"];
+            string hqlText = Request.QueryString["payload"];
 
-            PerformTest(hqltext);
+            PerformTest(hqlText);
         }
     }
 }

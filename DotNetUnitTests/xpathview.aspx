@@ -13,8 +13,8 @@
     <h3>The following is the XML file the query will be performed on:</h3>
     <textarea rows="15" cols="150" name="payload" form="theform" disabled="disabled"><%
                                                                      string path = Request.PhysicalApplicationPath;
-                                                                     string xmltext = System.IO.File.ReadAllText(path + "/resources/students.xml");                                                                 
-                                                                     Response.Write(xmltext);
+                                                                     string xmlText = System.IO.File.ReadAllText(path + "/resources/students.xml");                                                                 
+                                                                     Response.Write(xmlText);
     %></textarea>
     <form id="theform" action="xpathresults.aspx" method="get" autocomplete="off" runat="server">
         <input type="hidden" name="var" value="<%= Request.QueryString["var"] %>" />
