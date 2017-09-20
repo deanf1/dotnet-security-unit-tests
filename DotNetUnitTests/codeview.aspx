@@ -11,26 +11,18 @@
         string appPath = Request.PhysicalApplicationPath;
         string[] code = null;
         if (Request.QueryString["type"].Equals("xml"))
-            code = System.IO.File.ReadAllLines(appPath + "results.aspx.cs");
+            code = System.IO.File.ReadAllLines(appPath + "/TestCases/XXETestCases/" + Request.QueryString["var"] + ".aspx.cs");
         else if (Request.QueryString["type"].Equals("hql"))
-            code = System.IO.File.ReadAllLines(appPath + "hqlresults.aspx.cs");
+            code = System.IO.File.ReadAllLines(appPath + "/TestCases/HQLTestCases/" + Request.QueryString["var"] + ".aspx.cs");
         else if (Request.QueryString["type"].Equals("xpath"))
-            code = System.IO.File.ReadAllLines(appPath + "xpathresults.aspx.cs");
+            code = System.IO.File.ReadAllLines(appPath + "/TestCases/XPathTestCases/" + Request.QueryString["var"] + ".aspx.cs");
         else if (Request.QueryString["type"].Equals("xquery"))
-            code = System.IO.File.ReadAllLines(appPath + "xqueryresults.aspx.cs");
+            code = System.IO.File.ReadAllLines(appPath + "/TestCases/XQueryTestCases/" + Request.QueryString["var"] + ".aspx.cs");
 
         Response.Write("<pre>");
-        bool printFlag = false;
         foreach (string line in code)
         {
-            if (line.Contains(Request.QueryString["test"]))
-                printFlag = true;
-
-            if (printFlag)
-                Response.Write(line + "<br />");
-            
-            if (line.Contains("#endregion"))
-                printFlag = false;               
+            Response.Write(line + "<br />");
         }
         Response.Write("</pre>");
 

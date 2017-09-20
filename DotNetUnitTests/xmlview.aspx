@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1><%= Request.QueryString["test"] %></h1>
-    <a href="codeview.aspx?type=xml&test=<%= Request.QueryString["test"] %>">View code for this test</a>
+    <a href="codeview.aspx?type=xml&var=<%= Request.QueryString["var"] %>">View code for this test</a>
     <br /><br />
     <h3>Enter an XML file containing an entity:</h3>
     <textarea rows="15" cols="150" name="payload" form="theform"><%
@@ -16,7 +16,8 @@
                                                                      string xmlText = System.IO.File.ReadAllText(path + "/resources/xxetest.xml");                                                                 
                                                                      Response.Write(xmlText);
     %></textarea>
-    <form id="theform" action="results.aspx" method="get" autocomplete="off" runat="server">
+
+    <% Response.Write("<form id=\"theform\" action=\"TestCases/XXETestCases/" + Request.QueryString["var"] + ".aspx\" method=\"get\" autocomplete=\"off\" runat=\"server\">"); %>
         <input type="hidden" name="var" value="<%= Request.QueryString["var"] %>" />
         <input type="submit" value="Submit" />
     </form>

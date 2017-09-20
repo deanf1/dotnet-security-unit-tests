@@ -8,7 +8,7 @@ namespace DotNetUnitTests
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["var"].Contains("delete"))
+            if (Request.QueryString["var"].Contains("Delete"))
                 this.payloadValue = "Test' OR FirstName='Target";   // DELETE payload
             else
                 this.payloadValue = "Bobby' OR 'a'='a"; // SELECT payload

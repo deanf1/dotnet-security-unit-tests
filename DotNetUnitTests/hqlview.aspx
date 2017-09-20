@@ -8,11 +8,11 @@
 </head>
 <body>
     <h1><%= Request.QueryString["test"] %></h1>
-    <a href="codeview.aspx?type=hql&test=<%= Request.QueryString["test"] %>">View code for this test</a>
+    <a href="codeview.aspx?type=hql&var=<%= Request.QueryString["var"] %>">View code for this test</a>
     <br /><br />
     <%
         // DELETE statements help text
-        if (Request.QueryString["var"].Contains("delete"))
+        if (Request.QueryString["var"].Contains("Delete"))
         {
             Response.Write("<h3>The Student table has the following rows: ID, LastName, FirstName, Username, and Password.</h3>");
             Response.Write("<h3>This form performs a query that deletes a student named \"Test User\" that will be inserted beforehand.</h3>");
@@ -29,7 +29,7 @@
 
         %>
     
-    <form id="theform" action="hqlresults.aspx" method="get" autocomplete="off" runat="server">
+    <% Response.Write("<form id=\"theform\" action=\"TestCases/HQLTestCases/" + Request.QueryString["var"] + ".aspx\" method=\"get\" autocomplete=\"off\" runat=\"server\">"); %>
         <input type="hidden" name="var" value="<%= Request.QueryString["var"] %>" />
         Enter first name: <input type="text" name="payload" value="<%= payloadValue %>" />
         <input type="submit" value="Submit" />
