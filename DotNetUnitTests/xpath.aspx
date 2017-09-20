@@ -13,18 +13,19 @@
 <a href="index.aspx">.NET XXE Injection Tests</a> | <a href="nhibernate.aspx">NHibernate Injection Tests</a> | <a href="xpath.aspx">XPath Injection Tests</a> | <a href="xquery.aspx">XQuery Injection Tests</a>
 <%  Response.Write("<h3>");
     Response.Write("Current .NET Framework Version: " + HttpRuntime.TargetFramework.ToString());
-    Response.Write("<br />" + "Unsafe Tests: tbd" + "<br />" + "Safe Tests: tbd");
+    Response.Write("<br />" + "Unsafe Tests: 3" + "<br />" + "Safe Tests: 1");
     Response.Write("</h3>");
 %>
 
+<% int testCount = 30; %>
 <ul>
     <li><a href="https://msdn.microsoft.com/en-us/library/system.xml.xpath(v=vs.110).aspx">System.Xml.<b>XPath</b> (link to MSDN docs)</a>
-        <ul>
-            <li><a href="xpathview.aspx?title=Unsafe%20XPath&test=XPath%3A%20Unsafe%20when%20Using%20String%20Concatenation%20on%20XPath%20Expression%20Example&var=xpathunsafeconcat">Unsafe when Using String Concatenation on XPath Expression Example</a></li>
-			<li><a href="xpathview.aspx?title=Unsafe%20XPath&test=XPath%3A%20Unsafe%20when%20Using%20String%20Placeholders%20on%20XPath%20Expression%20Example&var=xpathunsafeplaceholder">Unsafe when Using String Placeholders on XPath Expression Example</a></li>
-			<li><a href="xpathview.aspx?title=Safe%20XPath&test=XPath%3A%20Safe%20when%20Whitelisting%20on%20XPath%20Expression%20Example&var=xpathsafelist">Safe when Whitelisting on XPath Expression Example</a></li>
-			<li><a href="xpathview.aspx?title=Unsafe%20XPath&test=XPath%3A%20Unsafe%20when%20Escaping%20Apostrophes%20on%20XPath%20Expression%20Example&var=xpathunsafeescape">Unsafe when Escaping Apostrophes on XPath Expression Example</a></li>
-		</ul>
+        <ol start="<%= testCount %>">
+            <li><a href="xpathview.aspx?title=Unsafe%20XPath&test=XPath%3A%20Unsafe%20when%20Using%20String%20Concatenation%20on%20XPath%20Expression%20Example&var=XPathUnsafeConcat">Unsafe when Using String Concatenation on XPath Expression Example</a></li>
+			<li><a href="xpathview.aspx?title=Unsafe%20XPath&test=XPath%3A%20Unsafe%20when%20Using%20String%20Placeholders%20on%20XPath%20Expression%20Example&var=XPathUnsafePlaceholder">Unsafe when Using String Placeholders on XPath Expression Example</a></li>
+			<li><a href="xpathview.aspx?title=Safe%20XPath&test=XPath%3A%20Safe%20when%20Whitelisting%20on%20XPath%20Expression%20Example&var=XPathSafeList">Safe when Whitelisting on XPath Expression Example</a></li>
+			<li><a href="xpathview.aspx?title=Unsafe%20XPath&test=XPath%3A%20Unsafe%20when%20Escaping%20Apostrophes%20on%20XPath%20Expression%20Example&var=XPathUnsafeEscape">Unsafe when Escaping Apostrophes on XPath Expression Example</a></li>
+		</ol>
     <br /></li>
 </ul>
 

@@ -17,25 +17,26 @@
     Response.Write("</h3>");
 %>
 
+<% int testCount = 20; %>
 <ul>
     <li>SELECT Statements
-        <ul>
-            <li><a href="hqlview.aspx?title=Safe%20NHibernate&test=SELECT%3A%20Safe%20when%20Using%20Built-in%20Functions%20Example&var=safedefault">Safe when Using Built-in Functions Example</a></li>
-            <li><a href="hqlview.aspx?title=Unsafe%20NHibernate&test=SELECT%3A%20Unsafe%20when%20Using%20String%20Concatenation%20on%20Custom%20HQL%20Queries%20%28CreateQuery%29%20Example&var=unsafe">Unsafe when Using String Concatenation on Custom HQL Queries (CreateQuery) Example</a></li>
-            <li><a href="hqlview.aspx?title=Unsafe%20NHibernate&test=SELECT%3A%20Unsafe%20when%20Using%20String%20Concatenation%20on%20Custom%20SQL%20Queries%20%28CreateSQLQuery%29%20Example&var=unsafesql">Unsafe when Using String Concatenation on Custom SQL Queries (CreateSQLQuery) Example</a></li>
-            <li><a href="hqlview.aspx?title=Unsafe%20NHibernate&test=SELECT%3A%20Unsafe%20when%20Using%20String%20Placeholders%20on%20Custom%20HQL%20Queries%20%28CreateQuery%29%20Example&var=unsafehqlstringplace">Unsafe when Using String Placeholders on Custom HQL Queries (CreateQuery) Example</a></li>
-            <li><a href="hqlview.aspx?title=Unsafe%20NHibernate&test=SELECT%3A%20Unsafe%20when%20Using%20String%20Placeholders%20on%20Custom%20SQL%20Queries%20%28CreateSQLQuery%29%20Example&var=unsafesqlstringplace">Unsafe when Using String Placeholders on Custom SQL Queries (CreateSQLQuery) Example</a></li>
-            <li><a href="hqlview.aspx?title=Safe%20NHibernate&test=SELECT%3A%20Safe%20when%20Parameterizing%20Custom%20HQL%20Queries%20%28CreateQuery%29%20Example&var=safeparam">Safe when Parameterizing Custom HQL Queries (CreateQuery) Example</a></li>
-            <li><a href="hqlview.aspx?title=Safe%20NHibernate&test=SELECT%3A%20Safe%20when%20Parameterizing%20Custom%20SQL%20Queries%20%28CreateSQLQuery%29%20Example&var=safeparamsql">Safe when Parameterizing Custom SQL Queries (CreateSQLQuery) Example</a></li>
-        </ul>
+        <ol start="<%= testCount %>">
+            <li><a href="hqlview.aspx?title=Safe%20NHibernate&test=SELECT%3A%20Safe%20when%20Using%20Built-in%20Functions%20Example&var=SafeDefault">Safe when Using Built-in Functions Example</a></li>
+            <li><a href="hqlview.aspx?title=Unsafe%20NHibernate&test=SELECT%3A%20Unsafe%20when%20Using%20String%20Concatenation%20on%20Custom%20HQL%20Queries%20%28CreateQuery%29%20Example&var=Unsafe">Unsafe when Using String Concatenation on Custom HQL Queries (CreateQuery) Example</a></li>
+            <li><a href="hqlview.aspx?title=Unsafe%20NHibernate&test=SELECT%3A%20Unsafe%20when%20Using%20String%20Concatenation%20on%20Custom%20SQL%20Queries%20%28CreateSQLQuery%29%20Example&var=UnsafeSQL">Unsafe when Using String Concatenation on Custom SQL Queries (CreateSQLQuery) Example</a></li>
+            <li><a href="hqlview.aspx?title=Unsafe%20NHibernate&test=SELECT%3A%20Unsafe%20when%20Using%20String%20Placeholders%20on%20Custom%20HQL%20Queries%20%28CreateQuery%29%20Example&var=UnsafeHQLStringPlace">Unsafe when Using String Placeholders on Custom HQL Queries (CreateQuery) Example</a></li>
+            <li><a href="hqlview.aspx?title=Unsafe%20NHibernate&test=SELECT%3A%20Unsafe%20when%20Using%20String%20Placeholders%20on%20Custom%20SQL%20Queries%20%28CreateSQLQuery%29%20Example&var=UnsafeSQLStringPlace">Unsafe when Using String Placeholders on Custom SQL Queries (CreateSQLQuery) Example</a></li>
+            <li><a href="hqlview.aspx?title=Safe%20NHibernate&test=SELECT%3A%20Safe%20when%20Parameterizing%20Custom%20HQL%20Queries%20%28CreateQuery%29%20Example&var=SafeParam">Safe when Parameterizing Custom HQL Queries (CreateQuery) Example</a></li>
+            <li><a href="hqlview.aspx?title=Safe%20NHibernate&test=SELECT%3A%20Safe%20when%20Parameterizing%20Custom%20SQL%20Queries%20%28CreateSQLQuery%29%20Example&var=SafeParamSQL">Safe when Parameterizing Custom SQL Queries (CreateSQLQuery) Example</a></li>
+        </ol>
     <br /></li>
 
     <li>DELETE Statements
-        <ul>
-            <li><a href="hqlview.aspx?title=Unsafe%20NHibernate&test=DELETE%3A%20Unsafe%20when%20Using%20String%20Concatenation%20on%20Custom%20HQL%20Queries%20Example&var=deleteunsafe">Unsafe when Using String Concatenation on Custom HQL Queries Example</a></li>
-            <li><a href="hqlview.aspx?title=Unsafe%20NHibernate&test=DELETE%3A%20Unsafe%20when%20Using%20String%20Placeholders%20on%20Custom%20HQL%20Queries%20Example&var=deleteunsafestringplace">Unsafe when Using String Placeholders on Custom HQL Queries Example</a></li>
-            <li><a href="hqlview.aspx?title=Safe%20NHibernate&test=DELETE%3A%20Safe%20when%20Parameterizing%20Custom%20HQL%20Queries%20Example&var=deletesafeparam">Safe when Parameterizing Custom HQL Queries Example</a></li>
-        </ul>
+        <ol start="<%= testCount += 7 %>">
+            <li><a href="hqlview.aspx?title=Unsafe%20NHibernate&test=DELETE%3A%20Unsafe%20when%20Using%20String%20Concatenation%20on%20Custom%20HQL%20Queries%20Example&var=DeleteUnsafe">Unsafe when Using String Concatenation on Custom HQL Queries Example</a></li>
+            <li><a href="hqlview.aspx?title=Unsafe%20NHibernate&test=DELETE%3A%20Unsafe%20when%20Using%20String%20Placeholders%20on%20Custom%20HQL%20Queries%20Example&var=DeleteUnsafeStringPlace">Unsafe when Using String Placeholders on Custom HQL Queries Example</a></li>
+            <li><a href="hqlview.aspx?title=Safe%20NHibernate&test=DELETE%3A%20Safe%20when%20Parameterizing%20Custom%20HQL%20Queries%20Example&var=DeleteSafeParam">Safe when Parameterizing Custom HQL Queries Example</a></li>
+        </ol>
     <br /></li>
 </ul>
 
