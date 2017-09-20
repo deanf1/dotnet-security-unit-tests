@@ -5,11 +5,11 @@ A web application that contains several unit tests for the purpose of .NET secur
 
 ## Overview
 The purpose of this web app is to test the following vulnerabilities in .NET (click to view their respective code):
-- [XML External Enitity (XXE) Injection](./DotNetUnitTests/results.aspx.cs)
+- [XML External Enitity (XXE) Injection](./DotNetUnitTests/TestCases/XXETestCases)
    - A summary of these tests can be found in the [OWASP XXE Prevention Cheat Sheet](https://www.owasp.org/index.php/XML_External_Entity_(XXE)_Prevention_Cheat_Sheet#.NET)
-- [NHibernate Query Language (HQL) Injection](./DotNetUnitTests/hqlresults.aspx.cs)
-- [XPath Query Language Injection](./DotNetUnitTests/xpathresults.aspx.cs)
-- [XQuery Query Language Injection](./DotNetUnitTests/xqueryresults.aspx.cs)
+- [NHibernate Query Language (HQL) Injection](./DotNetUnitTests/TestCases/HQLTestCases)
+- [XPath Query Language Injection](./DotNetUnitTests/TestCases/XPathTestCases)
+- [XQuery Query Language Injection](./DotNetUnitTests/TestCases/XQueryTestCases)
 
 The code can be analyzed by static code tools or deployed as a web application and analyzed via dynamic tools. The underlying C# code can also be used as examples for how to make .NET code safe/unsafe. You can also find detailed comments in the code with each test explaining why it is safe/unsafe.
 
