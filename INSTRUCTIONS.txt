@@ -6,3 +6,11 @@ To deploy the web application:
 	  (Note: The major fixes happen in 4.5.2, and there is no discernable difference between running in 4.5.2 and 4.6)
 	- Press 'q' to close the server when finished
 	
+To run all tests programmatically:
+
+	Make sure you have Python installed and in your path!
+
+	- Download ChromeDriver at https://sites.google.com/a/chromium.org/chromedriver/downloads
+	- Place the executable in the project base directory (or add it to your path manually)
+	- Deploy the web app
+	- Run RunAllTests.bat

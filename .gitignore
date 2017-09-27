@@ -8,6 +8,7 @@ DotNetUnitTests/App_Data/Sample.mdf
 DotNetUnitTests/App_Data/Sample_log.ldf
 DotNetUnitTests/Web.config
 DotNetUnitTests/resources/xxetestuser.xml
+chromedriver.exe
 
 # User-specific files
 *.suo
